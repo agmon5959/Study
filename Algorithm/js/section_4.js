@@ -133,8 +133,27 @@ isPrimeNum_2 = (n) => {
 // 멘토링
 function solution(test) {
     let ans;
+    let allArr = []; // 모든 경우의 수가 있는 배열
+    let cnt = 0;
+    for (let i = 1; i <= 4; i++) {
+        for (j = 1; j <= 4; j++) {
+            // 1에서 4까지 정답이 될 수 있는 모든 경우의 수가 담긴 배열을 만든다.
+            // if (i !== j){
+                allArr.push([i, j]);
+            // }
+            // 4중 포문 
+
+        }
+    }
+
+    // for (let i = 0; i < test.length; i++) {
+    //     for (j = 0; j < test.length; j++) {
+    //         // 인덱스로 비교해줘야한다.
+            
+    //     }
+    }
+
     return ans;
-}
 
 let arr = [[3, 4, 1, 2], [4, 3, 2, 1], [3, 1, 4, 2]];
 console.log(solution(arr));
