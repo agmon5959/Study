@@ -142,6 +142,7 @@ function solution(test) {
                 allArr.push([i, j]);
             // }
             // 4중 포문 
+            // 테스트
 
         }
     }
