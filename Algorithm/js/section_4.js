@@ -139,22 +139,96 @@ function solution(test) {
         for (j = 1; j <= 4; j++) {
             // 1에서 4까지 정답이 될 수 있는 모든 경우의 수가 담긴 배열을 만든다.
             // if (i !== j){
-                allArr.push([i, j]);
+            allArr.push([i, j]);
             // }
-            // 4중 포문 
-            // 테스트
+
+
 
         }
     }
+}
 
-    // for (let i = 0; i < test.length; i++) {
-    //     for (j = 0; j < test.length; j++) {
-    //         // 인덱스로 비교해줘야한다.
-            
-    //     }
+
+
+// let arr = [[3, 4, 1, 2], [4, 3, 2, 1], [3, 1, 4, 2]];
+// console.log(solution(arr));
+
+function solutionA(arr) {
+    // 카카오 2021 인턴
+    // 거리두기
+
+
+    let ansArr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        ansArr.push(findDist(i));
     }
 
-    return ans;
+    return ansArr;
 
-let arr = [[3, 4, 1, 2], [4, 3, 2, 1], [3, 1, 4, 2]];
-console.log(solution(arr));
+
+    function findDist(i) {
+        const dx = [-1, 1, 0, 0];
+        const dy = [0, 0, -1, 1];
+        let flag = true;
+        let cnt = 0;
+
+        for (let j = 0; j < arr.length; j++) {
+            for (let k = 0; k < arr.length; k++) {
+                if (arr[i][j][k] === "X") { // X인 경우
+                    continue;
+                } else if (arr[i][j][k] === "P") {
+                    // P인 경우 주위 P가 하나라도 있으면 flag = false
+                    for (let l = 0; l < arr.length; l++) {
+                        let moveX = j + dx[l];
+                        let moveY = k + dy[l];
+                        // 접근불가 인덱스가 아닌 경우에만 아래 조건문을 타도록 한다.
+                        if (arr[i][moveX] !== undefined && arr[i][moveX][moveY] !== undefined) {
+                            // debugger
+                            // P를 발견한 경우 flag는 false
+                            if (arr[i][moveX][moveY] === "P") {
+                                flag = false;
+                            }
+                            if (flag === false) {
+                                return 0
+                            }
+                        }
+
+                    }
+                } else {    // O인 경우
+                    // 내 주위 P가 2 이상이라면 return 0
+                    cnt = 0;
+                    for (let l = 0; l < arr.length; l++) {
+                    
+                        let moveX = j + dx[l];
+                        let moveY = k + dy[l];
+                        // 접근불가 인덱스가 아닌 경우에만 아래 조건문을 타도록 한다.
+                        if (arr[i][moveX] !== undefined && arr[i][moveX][moveY] !== undefined) {
+                            debugger
+                            // P를 발견한 경우 flag는 false
+                            if (arr[i][moveX][moveY] === "P") {
+                                cnt++;
+                            }
+                            if (cnt >= 2) {
+                                return 0
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return 1
+    }
+}
+
+let arrs =
+    [
+        ["POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"],
+        ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"],
+        ["PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"],
+        ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"],
+        ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]
+    ];
+console.log(solutionA(arrs));
