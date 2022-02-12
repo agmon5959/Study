@@ -129,31 +129,9 @@ isPrimeNum_2 = (n) => {
     return primeArray;
 }
 
-// 3번 문제
-// 멘토링
-function solution(test) {
-    let ans;
-    let allArr = []; // 모든 경우의 수가 있는 배열
-    let cnt = 0;
-    for (let i = 1; i <= 4; i++) {
-        for (j = 1; j <= 4; j++) {
-            // 1에서 4까지 정답이 될 수 있는 모든 경우의 수가 담긴 배열을 만든다.
-            // if (i !== j){
-            allArr.push([i, j]);
-            // }
 
-
-
-        }
-    }
-}
-
-
-
-// let arr = [[3, 4, 1, 2], [4, 3, 2, 1], [3, 1, 4, 2]];
-// console.log(solution(arr));
-
-function solutionA(arr) {
+// 번외
+function solution(arr) {
     // 카카오 2021 인턴
     // 거리두기
 
@@ -199,7 +177,7 @@ function solutionA(arr) {
                     // 내 주위 P가 2 이상이라면 return 0
                     cnt = 0;
                     for (let l = 0; l < arr.length; l++) {
-                    
+
                         let moveX = j + dx[l];
                         let moveY = k + dy[l];
                         // 접근불가 인덱스가 아닌 경우에만 아래 조건문을 타도록 한다.
@@ -223,12 +201,79 @@ function solutionA(arr) {
     }
 }
 
-let arrs =
-    [
-        ["POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"],
-        ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"],
-        ["PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"],
-        ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"],
-        ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]
-    ];
-console.log(solutionA(arrs));
+// 3번 문제
+// 멘토링
+function solution(test) {
+    // 해당 문제를 풀 때 인덱스의 값과 해당 인덱스가 가진 배열의 실제 값의 혼동,
+    // 등수는 낮을수록 높다는 점 , 4중 포문의 헷갈림 등등
+    // 문제를 풀기까지 오랜시간이 걸렸음.
+    let ans = 0;
+    for (let i = 1; i <= 4; i++) {
+        for (let j = 1; j <= 4; j++) {
+            if (i === j) { continue; } // 1,1 2,2 ... n,n 인 경우는 무시한다.
+            // 모든 경우의 수를 만들어놓고 재탐색
+            let cnt = 0;
+            for (let k = 0; k < test.length; k++) {
+                let pi = pj = 0;
+                for (let s = 0; s < test[0].length; s++) {
+                    // i랑 j의 등수찾기
+                    if (test[k][s] === i) {
+                        pi = s; // 인덱스
+                    } else if (test[k][s] === j) {
+                        pj = s;
+                    }
+                }
+                if (pi < pj) {
+                    cnt++;
+                } else {
+                    continue;
+                }
+            }
+            if (cnt === test.length) {
+                ans++;
+            }
+
+        }
+    }
+    return ans;
+}
+
+// 4번 문제
+// 졸업선물
+function solution(m, product) {
+    // m = 가지고있는 돈
+    // product는 상품의 가격표 [ 가격(반값할인가능) , 배송비 ]
+    let ans = [];
+    // 현재 예산으로 선물할 수 있는 최대 학생수를 출력
+    // 1) 제일 큰 가격을 반값 ( 제일 큰 가격을 반값으로 해도 배송비를 포함했을 떄 다른 애들보다 크다면 포함하지 않는다.)
+    // 2) 가격 + 배송비 
+
+    // 오름차순 정렬
+    // product.sort((a, b) => {
+    //     return (a[0] + a[1]) - (b[0] + a[1]);
+    // })
+
+
+    // 할인이 적용된 상품
+    // let nodisCntProduct = product[i][0] + product[i][1];
+
+    for (let i = 0; i < product.length; i++) {
+        let money = 0;
+        let cnt = 0;
+        let discntProduct = (product[i][0] / 2) + product[i][1];
+        product.forEach((iter, idx) => {
+                if (i === idx) {
+                    money += discntProduct;
+                } else {
+                    money += iter[0] + iter[1]
+                }
+        })
+        ans.push(money)
+        // 가장 작은 숫자가 담겨있는 idx를 for문 돌려서 28이 될때까지 돌린다 .. ?
+        
+    }
+    debugger
+}
+
+let arr = [[6, 6], [2, 2], [4, 3], [4, 5], [10, 3]];
+console.log(solution(28, arr));
