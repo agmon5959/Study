@@ -241,39 +241,73 @@ function solution(test) {
 // 4번 문제
 // 졸업선물
 function solution(m, product) {
-    // m = 가지고있는 돈
-    // product는 상품의 가격표 [ 가격(반값할인가능) , 배송비 ]
-    let ans = [];
-    // 현재 예산으로 선물할 수 있는 최대 학생수를 출력
-    // 1) 제일 큰 가격을 반값 ( 제일 큰 가격을 반값으로 해도 배송비를 포함했을 떄 다른 애들보다 크다면 포함하지 않는다.)
-    // 2) 가격 + 배송비 
 
     // 오름차순 정렬
-    // product.sort((a, b) => {
-    //     return (a[0] + a[1]) - (b[0] + a[1]);
-    // })
-
-
+    product.sort((a, b) => {
+        return (a[0] + a[1]) - (b[0] + a[1]);
+    })
     // 할인이 적용된 상품
-    // let nodisCntProduct = product[i][0] + product[i][1];
-
+    let cntArr = []
     for (let i = 0; i < product.length; i++) {
-        let money = 0;
-        let cnt = 0;
+        // let money = 0;
+        let cnt = 1;
         let discntProduct = (product[i][0] / 2) + product[i][1];
-        product.forEach((iter, idx) => {
-                if (i === idx) {
-                    money += discntProduct;
-                } else {
-                    money += iter[0] + iter[1]
+        let money = m - discntProduct;
+        // some에서의 return true > break / false > continue
+        // forEach에서 break가 오작동하는 이슈가 있음.
+        // 따라서 forEach말고 some을 사용하도록 하자.
+        product.some((iter, idx) => {
+            // 28에서 빼나간다.
+            if (i !== idx) {
+                money -= iter[0] + iter[1]
+                if (money >= 0) {
+                    cnt++;
                 }
+                // else{
+                //     return true; // break;
+                // }
+            }
+            // else{
+            //     return false; // continue;
+            // }
         })
-        ans.push(money)
-        // 가장 작은 숫자가 담겨있는 idx를 for문 돌려서 28이 될때까지 돌린다 .. ?
-        
+        cntArr.push(cnt)
     }
-    debugger
+
+    return Math.max(...cntArr);
 }
 
-let arr = [[6, 6], [2, 2], [4, 3], [4, 5], [10, 3]];
-console.log(solution(28, arr));
+// 5번 문제
+// k번째 큰 수
+function solution(n, k, card) {
+    let arr = [];
+    // n 은 카드의 수
+    // k 번째 값
+    // card는 배열
+    for (let i = 0; i < card.length; i++) {
+        for (let j = 0; j < card.length; j++) {
+            for (let k = 0; k < card.length; k++) {
+                if (i === j || i === k || j === k) {
+                    continue;
+                } else {
+                    arr.push(card[i] + card[j] + card[k])
+                }
+            }
+        }
+    }
+
+    // 내림차순 정렬
+    arr.sort((a, b) => {
+        return b - a;
+    })
+
+    let tempArr = new Set(arr);
+
+    // K번째 큰 값
+    if ([...tempArr][k - 1] === undefined) {
+        return -1;
+    } else {
+        return [...tempArr][k - 1]
+    }
+
+}
