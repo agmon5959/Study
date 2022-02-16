@@ -35,39 +35,7 @@ function solution(arr1, arr2) {
 // 3번 문제
 // 연속 부분 수열
 function solution(m, arr) {
-    let left = 0;
-    let right = 1;
-    let cnt = 0;
-    let sum = arr[left] + arr[right];
-
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[right] === undefined || arr[left] === undefined) break;
-        debugger
-        if (sum < m) { // sum이 m보다 작을 때
-            debugger
-            sum += arr[right];
-            right++;
-            if (sum + arr[right] === m) {
-                sum -= arr[left];
-                cnt++;
-                left--;
-            }
-        } else if (sum > m) {
-            debugger
-            sum -= arr[left];
-            left++;
-            
-            if (sum + arr[right] === m) {
-                sum -= arr[left];
-                cnt++;
-                left--;
-            }
-            
-        }
-
-
-    }
-    debugger
+    let cnt;
 
     return cnt;
 }
