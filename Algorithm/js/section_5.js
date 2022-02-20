@@ -36,25 +36,31 @@ function solution(arr1, arr2) {
 // 연속 부분 수열
 function solution(m, arr) {
     let cnt;
-
-    return cnt;
-}
-
-let a = [1, 2, 1, 3, 1, 1, 1, 2];
-console.log(solution(6, a));
-
-function solution(m, arr) {
-    let cnt;
-
-    return cnt;
-}
-
-let a = [1, 2, 1, 3, 1, 1, 1, 2];
-console.log(solution(6, a));
-
-function solution(m, arr) {
-    let cnt;
-
+    let L = 0;
+    let R = 1;
+    let cnt = 0;
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+        if(i===0){
+            sum = arr[L]+arr[R];
+        }else{
+            if(sum > m){
+                R++;
+                sum+=arr[R];
+                if(sum === m){
+                    cnt++;
+                    R++;
+                }
+            }else if(sum < m){
+                sum-=arr[L];
+                L++;
+                if(sum === m){
+                    cnt++;
+                    R++;
+                }
+            }
+        }
+    }
     return cnt;
 }
 
