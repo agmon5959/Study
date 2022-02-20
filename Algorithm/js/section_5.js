@@ -35,34 +35,57 @@ function solution(arr1, arr2) {
 // 3번 문제
 // 연속 부분 수열
 function solution(m, arr) {
-    let cnt;
-    let L = 0;
-    let R = 1;
     let cnt = 0;
     let sum = 0;
-    for (let i = 0; i < array.length; i++) {
-        if(i===0){
-            sum = arr[L]+arr[R];
-        }else{
-            if(sum > m){
-                R++;
-                sum+=arr[R];
-                if(sum === m){
-                    cnt++;
-                    R++;
-                }
-            }else if(sum < m){
-                sum-=arr[L];
-                L++;
-                if(sum === m){
-                    cnt++;
-                    R++;
-                }
-            }
+    let L = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+        if (sum === m) { cnt++; }
+        while (sum >= m) {
+            sum -= arr[L++];
+            if (sum === m) { cnt++; }
         }
     }
     return cnt;
 }
 
-let a = [1, 2, 1, 3, 1, 1, 1, 2];
-console.log(solution(6, a));
+// 4번 문제
+// 연속부분수열2
+function solution(m, arr) {
+    let sum = 0;
+    let L = 0;
+    let cnt = 0;
+    for (let R = 0; R < arr.length; R++) {
+        sum += arr[R];
+        if (sum <= m) {
+            cnt++;
+        }
+        if (arr[R] <= m) {
+            cnt++;
+        }
+        while (sum > m) {
+            sum -= arr[L];
+            L++;
+            if (sum <= m) {
+                cnt++;
+            }
+        }
+
+    }
+    return cnt;
+}
+
+// 5번 문제
+// 최대 매출
+function solution(k, arr){
+    let maxSale = 0;
+    let lt = 0;
+    let rt = k-1;
+    for (let i = 0; i < arr.length; i++) {
+        
+        
+    }
+}
+
+let a=[12, 15, 11, 20, 25, 10, 20, 19, 13, 15];
+console.log(solution(3, a));
