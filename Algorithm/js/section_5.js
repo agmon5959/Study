@@ -67,6 +67,8 @@ function solution(m, arr) {
             sum -= arr[L];
             L++;
             if (sum <= m) {
+
+                
                 cnt++;
             }
         }
