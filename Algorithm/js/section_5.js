@@ -67,8 +67,6 @@ function solution(m, arr) {
             sum -= arr[L];
             L++;
             if (sum <= m) {
-
-                
                 cnt++;
             }
         }
@@ -80,13 +78,20 @@ function solution(m, arr) {
 // 5번 문제
 // 최대 매출
 function solution(k, arr){
-    let maxSale = 0;
-    let lt = 0;
-    let rt = k-1;
-    for (let i = 0; i < arr.length; i++) {
-        
-        
+    // 슬라이딩 윈도우 알고리즘
+    let sum = 0;
+    let tempSum = 0;
+    for( let i =0 ; i<k;i++){
+        sum += arr[i];
     }
+    tempSum = sum;
+    for (let i = k; i < arr.length; i++) {
+        tempSum = (tempSum+arr[i])-arr[i-k];
+        if(tempSum > sum){
+            sum = tempSum;
+        }
+    }
+    return sum;
 }
 
 let a=[12, 15, 11, 20, 25, 10, 20, 19, 13, 15];
