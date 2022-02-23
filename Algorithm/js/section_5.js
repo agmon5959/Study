@@ -93,6 +93,13 @@ function solution(k, arr){
     }
     return sum;
 }
+// 문제 6
+// 학급 회장(해쉬)
+function solution(s){  
+    let ans;
+    
+    return ans;
+}
 
-let a=[12, 15, 11, 20, 25, 10, 20, 19, 13, 15];
-console.log(solution(3, a));
+let str="BACBACCACCBDEDE";
+console.log(solution(str));
