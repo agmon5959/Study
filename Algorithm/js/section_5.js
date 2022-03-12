@@ -77,17 +77,17 @@ function solution(m, arr) {
 
 // 5번 문제
 // 최대 매출
-function solution(k, arr){
+function solution(k, arr) {
     // 슬라이딩 윈도우 알고리즘
     let sum = 0;
     let tempSum = 0;
-    for( let i =0 ; i<k;i++){
+    for (let i = 0; i < k; i++) {
         sum += arr[i];
     }
     tempSum = sum;
     for (let i = k; i < arr.length; i++) {
-        tempSum = (tempSum+arr[i])-arr[i-k];
-        if(tempSum > sum){
+        tempSum = (tempSum + arr[i]) - arr[i - k];
+        if (tempSum > sum) {
             sum = tempSum;
         }
     }
@@ -95,11 +95,23 @@ function solution(k, arr){
 }
 // 문제 6
 // 학급 회장(해쉬)
-function solution(s){  
-    let ans;
-    
-    return ans;
+function solution(s) {
+    let answer;
+    let sH = new Map();
+    let max = 0;
+    for(let i of s){
+        if(sH.has(i)){
+            sH.set(i,(sH.get(i)+1 ));
+        }else{
+            sH.set(i,1);
+        }
+        if(max < sH.get(i)){
+            max = sH.get(i);
+            answer = i;
+        }
+    }
+    return answer;
 }
 
-let str="BACBACCACCBDEDE";
+let str = "BACBACCACCBDEDE";
 console.log(solution(str));
