@@ -99,13 +99,13 @@ function solution(s) {
     let answer;
     let sH = new Map();
     let max = 0;
-    for(let i of s){
-        if(sH.has(i)){
-            sH.set(i,(sH.get(i)+1 ));
-        }else{
-            sH.set(i,1);
+    for (let i of s) {
+        if (sH.has(i)) {
+            sH.set(i, (sH.get(i) + 1));
+        } else {
+            sH.set(i, 1);
         }
-        if(max < sH.get(i)){
+        if (max < sH.get(i)) {
             max = sH.get(i);
             answer = i;
         }
@@ -113,5 +113,98 @@ function solution(s) {
     return answer;
 }
 
-let str = "BACBACCACCBDEDE";
-console.log(solution(str));
+// 문제 7번
+// 아나그램
+function solution(str1, str2) {
+    if (str1.length !== str2.length) {
+        return "NO";
+    } else {
+        let ans = "YES";
+        let sH = new Map();
+        // str1을 기반으로 Map 생성
+        for (let i of str1) {
+            if (sH.has(i)) {
+                sH.set(i, sH.get(i) + 1);
+            } else {
+                sH.set(i, 1);
+            }
+        }
+
+        for (let i of str2) {
+            // 해당 값을 가지고 있는 경우
+            if (sH.has(i)) {
+                sH.set(i, sH.get(i) - 1);
+                if (sH.get(i) < 0) {
+                    return "NO";
+                }
+            }
+            // 값을 가지고 있지 않은 경우
+            else {
+                return "NO";
+            }
+        }
+        return ans;
+    }
+
+}
+
+// 8번 문제
+// 모든 아나그램
+function solution(s, t) {
+
+    const getAnagram = (arr, str) => {
+        let cnt = 0;
+        let sH = new Map();
+        // 배열을 맵으로 만든다.
+        for (let i of arr) {
+            if (sH.has(i)) {
+                sH.set(i, sH.get(i) + 1);
+            } else {
+                sH.set(i, 1);
+            }
+        }
+
+        // sH와 비교
+        for(let i of str){
+            // 일치하는게 있음
+            if(sH.has(i)){
+                sH.set(i,sH.get(i)-1);
+                if(sH.get(i) < 0){
+                    return false;
+                }else{
+                    cnt ++;
+                }
+            // 일치하는게 없음 즉 아나그램이 아님
+            }else{
+                return false;
+            }
+        }
+
+        if(cnt === arr.length) return true;
+
+    }
+
+    let leftPoint = 0;
+    let rightPoint = t.length - 1;
+    let 비교대상 = [];
+    let cnt = 0;
+
+    for (let i = leftPoint; i < s.length; leftPoint++) {
+        비교대상 = [s[leftPoint], s[leftPoint + 1], s[rightPoint]];
+        rightPoint++;
+        let result = getAnagram(비교대상, t);
+        if (result) {
+            cnt++;
+        }
+        // 더이상 진행할 수 없는 경우
+        if (rightPoint == s.length) {
+            break;
+        }
+
+    }
+    return cnt;
+}
+
+// let a = "bacaAacba";
+// let b = "";
+// console.log(solution(a, b));
