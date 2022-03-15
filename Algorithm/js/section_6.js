@@ -39,6 +39,8 @@ function solution(s) {
     }
 }
 
+// 3번 문제
+// 크레인 인형뽑기 ( 카카오 )
 function solution(board, moves) {
     let score = 0;
     let container = [];
@@ -107,17 +109,105 @@ function solution(board, moves) {
             }
         }
     }
-    
+
     return score;
 
 }
-let a =
-    [
-        [0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 3],
-        [0, 2, 5, 0, 1],
-        [4, 2, 4, 4, 2],
-        [3, 5, 1, 3, 1]
-    ];
-let b = [1, 5, 3, 5, 1, 2, 1, 4];
+
+// 4번문제
+// 후위식 연산
+function solution(s) {
+    let answer;
+    let stack = [];
+    let left, right;
+    for (let x of s) {
+        if (!isNaN(Number(x))) {
+            stack.push(Number(x));
+        } else {
+            right = stack.pop();
+            left = stack.pop();
+            switch (x) {
+                case "+":
+                    stack.push(Number(left + right));
+                    break;
+                case "-":
+                    stack.push(Number(left - right));
+                    break;
+                case "*":
+                    stack.push(Number(left * right));
+                    break;
+                case "/":
+                    stack.push(Number(left / right));
+                    break;
+            }
+        }
+    }
+    return stack.pop();
+}
+
+// 6번 문제
+// 쇠막대기
+function solution(s) {
+
+    // stack이라는 temp 메모리를 활용해야했음.
+    // 입력값으로  () / {} / [] 이런 애들이 들어오는 경우엔 80%는 스택을 사용하여 풀면 편리하다.
+
+    let answer = 0;
+    let stack = [];
+    for (let i = 0; i < s.length; i++) {
+        // 여는 괄호
+        if (s[i] === "(") {
+            stack.push(s[i]);
+        } else if (s[i] === ")") {
+            // 닫는괄호
+            if (s[i - 1] === "(") { // 레이저
+                stack.pop();
+                answer += stack.length;
+            } else {  // 막대기의 끝
+                stack.pop();
+                answer += 1;
+            }
+        }
+    }
+
+    return answer;
+}
+
+// 6번 문제
+// 공주 구하기
+function solution(n, k) {
+    let cnt = 0;
+    let arr = Array.from({ length: n }, (v, k) => k + 1 );
+    // 주기는 k
+    // cnt가 k가 되면 해당 인덱스를 제외한다.
+
+    while(arr.length > 1){
+        cnt ++;
+        if(cnt === k){
+            arr.push(arr.shift());
+            arr.pop();
+            cnt = 0;
+        }else{
+            // 배열 맨 앞의 값을 맨 뒤로 옮긴다.
+            arr.push(arr.shift());
+        }
+    }
+    return arr.pop();
+}
+
+// 7번 문제
+// 교육과정설계
+function solution(need, plan){
+    let arr = [...need];
+    let tempArr = [];
+    [...plan].forEach((iter)=>{
+        if(arr.includes(iter)){
+            tempArr.push(iter);
+        }
+    })
+    return tempArr.join('') === need ? "YES" : "NO"
+}
+
+let a="CBA";
+let b="CBDAGE";
 console.log(solution(a, b));
