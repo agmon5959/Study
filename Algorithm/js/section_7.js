@@ -1,10 +1,21 @@
 // 1번 문제
 // 선택 정렬
-function solution(arr){
+function solution(arr) {
     let ans;
-    console.log('AAA')
-    return ans;
+
+    for (let i = 0; i < arr.length - 1; i++) {
+        let idx = i;
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[idx]) {
+                idx = j;
+            }
+
+        }
+        [arr[i], arr[idx]] = [arr[idx], arr[i]];
+        console.log( 'i > ',i ,'idx > ',idx)
+    }
+    return arr;
 }
 
-let arr=[13, 5, 11, 7, 23, 15];
+let arr = [13, 5, 11, 7, 23, 15];
 console.log(solution(arr));
