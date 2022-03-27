@@ -164,12 +164,42 @@ function solution(arr) {
     for (let x of arr) {
         if (x[0] >= endTime) {
             endTime = x[1];
-            cnt ++;
+            cnt++;
         }
     }
     return cnt;
 }
 
-let arr = [[1, 4], [2, 3], [3, 5], [4, 6], [5, 7]];
-// let arr = [[3, 3], [1, 3], [2, 3]];
+// 9번 문제
+// 결혼식
+// 타임라인을 이용해서 풀었음.
+// 오는시간 및 가는시간을 쪼갠 뒤 s / e 만나면서 최대값 추출
+function solution(times) {
+    let timeLine = [];
+    let cnt = 0;
+    let ans = 0;
+    times.forEach((iter) => {
+        timeLine.push([iter[0], 's']);
+        timeLine.push([iter[1], 'e']);
+    })
+    timeLine.sort((a, b) => {
+        if (a[0] === b[0]) return a[1].charCodeAt() - b[1].charCodeAt();
+        else return a[0] - b[0];
+    })
+
+    for (let i = 0; i < timeLine.length; i++) {
+        if (timeLine[i][1] === 's') {
+            cnt++;
+        } else {
+            cnt--;
+        }
+        if(cnt > ans){
+            ans = cnt;
+        }
+    }
+
+    return ans;
+}
+
+let arr = [[14, 18], [12, 15], [15, 20], [20, 30], [5, 15]];
 console.log(solution(arr));
