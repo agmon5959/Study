@@ -201,5 +201,11 @@ function solution(times) {
     return ans;
 }
 
-let arr = [[14, 18], [12, 15], [15, 20], [20, 30], [5, 15]];
-console.log(solution(arr));
+// 10번 문제
+// 이분검색
+function solution(target, arr){
+    return arr.sort().indexOf(target)+1;
+}
+
+let arr=[23, 87, 65, 12, 57, 32, 99, 81];
+console.log(solution(32, arr));
