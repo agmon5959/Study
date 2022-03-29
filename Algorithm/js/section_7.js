@@ -193,7 +193,7 @@ function solution(times) {
         } else {
             cnt--;
         }
-        if(cnt > ans){
+        if (cnt > ans) {
             ans = cnt;
         }
     }
@@ -203,9 +203,37 @@ function solution(times) {
 
 // 10번 문제
 // 이분검색
-function solution(target, arr){
-    return arr.sort().indexOf(target)+1;
+function solution(target, arr) {
+    // 이분검색은 자료가 반드시 정렬된 상태에서 사용할 수 있음.
+    // 왼쪽 끝을 가르키는 포인터와 오른쪽 끝을 가르키는 포인터 두개가 있어야한다.
+    // 검색범위를 반으로 쪼개가면서 찾는 방법.
+
+    arr.sort();                     // 오름차순 정렬
+    let lt = 0;                     // 초기 왼쪽 포인터 선언 및 할당
+    let rt = arr.length - 1;        // 초기 오른쪽 포인터 선언 및 할당
+    let mid = parseInt((lt + rt) / 2);  // 초기 중간 포인터 선언 및 할당
+    let ans = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+
+        if (arr[mid] === target) {
+            ans = mid;
+            break;
+        }
+
+        else if (arr[mid] > target) {
+            rt = mid;
+            mid = parseInt((lt + rt) / 2);
+        }
+        else {
+            lt = mid;
+            mid = parseInt((lt + rt) / 2);
+        }
+
+    }
+
+    return ans + 1;
 }
 
-let arr=[23, 87, 65, 12, 57, 32, 99, 81];
+let arr = [1, 2, 3, 23, 87, 65, 12, 57, 32, 99, 81];
 console.log(solution(32, arr));
