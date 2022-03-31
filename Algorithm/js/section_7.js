@@ -235,5 +235,45 @@ function solution(target, arr) {
     return ans + 1;
 }
 
-let arr = [1, 2, 3, 23, 87, 65, 12, 57, 32, 99, 81];
-console.log(solution(32, arr));
+// 11번 문제
+// 뮤직비디오
+// 이분 검색을 이용한 결정 알고리즘
+function solution(m, songs) {
+    let ans = 0;
+
+    // 해당 부분이 제일 중요함.
+    let count = (arr, value) => {
+
+        let cnt = 1;
+        let sum = 0;
+
+        for (let x of arr) {
+            if (sum + x > value) {
+                cnt++;
+                sum = x;
+            } else {
+                sum += x;
+            }
+        }
+        return cnt;
+    }
+
+    let lt = Math.max(...songs);    // 이분 검색을 위한 최소값으로 배열의 최대값을 넣어준다.
+    let rt = songs.reduce((acc, cur) => acc + cur, 0); // 이분검색을 위한 최대값으로 배열의 합을 넣어준다.
+
+    while (lt <= rt) {
+        let mid = parseInt((lt + rt) / 2); // parseInt로 소수점을 제거한다.
+
+        if (count(songs, mid) <= m) {
+            ans = mid;
+            rt = mid-1; // -1 해주는것이 중요함. 아니면 무한루프를 돌게 됨.
+        } else {
+            lt = mid+1; // +1 해주는것이 중요함. 아니면 무한루프를 돌게 됨.
+        }
+    }
+
+    return ans;
+}
+
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+console.log(solution(3, arr));
