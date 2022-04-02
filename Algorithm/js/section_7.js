@@ -266,15 +266,71 @@ function solution(m, songs) {
 
         if (count(songs, mid) <= m) {
             ans = mid;
-            rt = mid-1; // -1 해주는것이 중요함. 아니면 무한루프를 돌게 됨.
+            rt = mid - 1; // -1 해주는것이 중요함. 아니면 무한루프를 돌게 됨.
         } else {
-            lt = mid+1; // +1 해주는것이 중요함. 아니면 무한루프를 돌게 됨.
-            
+            lt = mid + 1; // +1 해주는것이 중요함. 아니면 무한루프를 돌게 됨.
+
         }
     }
 
     return ans;
 }
 
-let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// 이진검색 연습
+function binarySearch(targetNum, targetArr) {
+
+    let left = 0;
+    let right = targetArr.length - 1;
+    let mid = 0;
+
+    while (left <= right) {
+        debugger
+        mid = parseInt((left + right) / 2);
+        if (targetArr[mid] === targetNum) {
+            return mid;
+        } else {
+            if (targetArr[mid] < targetNum) {
+                // 찾고자하는 값이 오른쪽에 있음
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+    }
+    return mid;
+
+}
+
+// 12번 문제
+// 마구간 정하기
+function solution(c, stable) {
+
+    function count(stable, dist) {
+        let cnt = 1, ep = stable[0];
+        for (let i = 1; i < stable.length; i++) {
+            if (stable[i] - ep >= dist) {
+                cnt++;
+                ep = stable[i];
+            }
+        }
+        return cnt;
+    }
+
+    let answer;
+    stable.sort((a, b) => a - b);
+    let lt = 0;
+    let rt = stable[stable.length - 1];
+    
+    while (lt <= rt) {
+        let mid = parseInt((lt + rt) / 2);
+        if (count(stable, mid) >= c) {
+            answer = mid;
+            lt = mid + 1;
+        }
+        else rt = mid - 1;
+    }
+    return answer;
+}
+
+let arr = [1, 2, 8, 4, 9];
 console.log(solution(3, arr));
