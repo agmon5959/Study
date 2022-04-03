@@ -235,102 +235,48 @@ function solution(target, arr) {
     return ans + 1;
 }
 
+function count(songs, capacity) {
+    let cnt = 1, sum = 0;
+    for (let x of songs) {
+        if (sum + x > capacity) {
+            cnt++;
+            sum = x;
+        }
+        else sum += x;
+    }
+    return cnt;
+}
+
 // 11번 문제
 // 뮤직비디오
-// 이분 검색을 이용한 결정 알고리즘
-function solution(m, songs) {
-    let ans = 0;
-
-    // 해당 부분이 제일 중요함.
-    let count = (arr, value) => {
-
-        let cnt = 1;
-        let sum = 0;
-
-        for (let x of arr) {
-            if (sum + x > value) {
-                cnt++;
-                sum = x;
-            } else {
-                sum += x;
-            }
+function count(songs, capacity){
+    let cnt=1, sum=0;
+    for(let x of songs){
+        if(sum+x > capacity){
+            cnt++;
+            sum=x;
         }
-        return cnt;
+        else sum+=x;
     }
-
-    let lt = Math.max(...songs);    // 이분 검색을 위한 최소값으로 배열의 최대값을 넣어준다.
-    let rt = songs.reduce((acc, cur) => acc + cur, 0); // 이분검색을 위한 최대값으로 배열의 합을 넣어준다.
-
-    while (lt <= rt) {
-        let mid = parseInt((lt + rt) / 2); // parseInt로 소수점을 제거한다.
-
-        if (count(songs, mid) <= m) {
-            ans = mid;
-            rt = mid - 1; // -1 해주는것이 중요함. 아니면 무한루프를 돌게 됨.
-        } else {
-            lt = mid + 1; // +1 해주는것이 중요함. 아니면 무한루프를 돌게 됨.
-
-        }
-    }
-
-    return ans;
+    return cnt;
 }
 
-// 이진검색 연습
-function binarySearch(targetNum, targetArr) {
-
-    let left = 0;
-    let right = targetArr.length - 1;
-    let mid = 0;
-
-    while (left <= right) {
-        debugger
-        mid = parseInt((left + right) / 2);
-        if (targetArr[mid] === targetNum) {
-            return mid;
-        } else {
-            if (targetArr[mid] < targetNum) {
-                // 찾고자하는 값이 오른쪽에 있음
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-    }
-    return mid;
-
-}
-
-// 12번 문제
-// 마구간 정하기
-function solution(c, stable) {
-
-    function count(stable, dist) {
-        let cnt = 1, ep = stable[0];
-        for (let i = 1; i < stable.length; i++) {
-            if (stable[i] - ep >= dist) {
-                cnt++;
-                ep = stable[i];
-            }
-        }
-        return cnt;
-    }
-
+function solution(m, songs){
     let answer;
-    stable.sort((a, b) => a - b);
-    let lt = 0;
-    let rt = stable[stable.length - 1];
-    
-    while (lt <= rt) {
-        let mid = parseInt((lt + rt) / 2);
-        if (count(stable, mid) >= c) {
-            answer = mid;
-            lt = mid + 1;
+    let lt=Math.max(...songs);
+    let rt=songs.reduce((a, b)=>a+b, 0);
+    while(lt<=rt){
+        let mid=parseInt((lt+rt)/2);
+        if(count(songs, mid)<=m){
+            answer=mid;
+            rt=mid-1;
         }
-        else rt = mid - 1;
-    }
+        else{
+            lt=mid+1;
+        }
+    } 
     return answer;
 }
 
-let arr = [1, 2, 8, 4, 9];
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 console.log(solution(3, arr));
