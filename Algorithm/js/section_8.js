@@ -33,12 +33,18 @@ function solution(n) {
 // 이진트리순회
 function solution(n){
     function DFS(n){
-        if(){
-            
+        if(n>7){
+            return
         }else{
-
+            // console.log(n); 전위
+            DFS(n*2);
+            // console.log(n); 중위
+            DFS((n*2)+1);
+            // console.log(n); 후위
+            
         }
     }
+    DFS(n);
 }
 
 console.log(solution(1));
