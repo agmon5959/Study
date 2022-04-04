@@ -42,6 +42,7 @@ function solution(n){
             DFS((n*2)+1);
             // console.log(n); 후위
             
+            
         }
     }
     DFS(n);
