@@ -18,9 +18,9 @@ function solution(n) {
     const DFS = (num) => {
         if (num === 0) return
         else {
-        
+
             DFS(parseInt(num / 2));
-            answer += num%2;
+            answer += num % 2;
         }
     }
 
@@ -31,15 +31,15 @@ function solution(n) {
 
 // 3번 문제
 // 이진트리순회
-function solution(n){
-    function DFS(n){
-        if(n>7){
+function solution(n) {
+    function DFS(n) {
+        if (n > 7) {
             return
-        }else{
+        } else {
             // console.log(n); 전위
-            DFS(n*2);
+            DFS(n * 2);
             // console.log(n); 중위
-            DFS((n*2)+1);
+            DFS((n * 2) + 1);
             // console.log(n); 후위
         }
     }
@@ -48,9 +48,29 @@ function solution(n){
 
 // 4번 문제
 // 부분집합 구하기
-function solution(n){
-    let answer=[];
-   
+function solution(n) {
+    let answer = [];
+    let ch = Array.from({ length: n + 1 }, () => 0);
+    function DFS(L) {
+        if (L === n + 1) {
+            let tmp = "";
+            for (let i = 1; i <= n; i++) {
+                if (ch[i] === 1) tmp += (i + " ");
+            }
+            if (tmp.length > 0) answer.push(tmp.trim());
+        }
+        else {
+            // 해당 문제를 기준으로 좌측은 True 우측은 False 로 생각한다.
+            // 왼쪽 방향 갈래
+            ch[L] = 1;
+            DFS(L + 1);
+
+            // 오른쪽 방향 갈래
+            ch[L] = 0;
+            DFS(L + 1);
+        }
+    }
+    DFS(1);
     return answer;
 }
 
