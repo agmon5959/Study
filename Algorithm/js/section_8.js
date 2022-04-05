@@ -41,11 +41,17 @@ function solution(n){
             // console.log(n); 중위
             DFS((n*2)+1);
             // console.log(n); 후위
-            
-            
         }
     }
     DFS(n);
 }
 
-console.log(solution(1));
+// 4번 문제
+// 부분집합 구하기
+function solution(n){
+    let answer=[];
+   
+    return answer;
+}
+
+console.log(solution(3));
