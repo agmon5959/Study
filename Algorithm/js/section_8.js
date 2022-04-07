@@ -101,5 +101,25 @@ function solution(arr) {
     return answer;
 }
 
-let arr = [1, 3, 5, 6, 7, 10];
-console.log(solution(arr));
+function solution(c, arr) {
+    let ans = 0;
+    let sum = 0;
+    let array = [];
+
+    function DFS(idx, pSum) {
+        if (pSum > c) return;
+        if (idx === arr.length) {
+            ans = Math.max(ans, pSum);
+        } else {
+            DFS(idx + 1, pSum + arr[idx]);
+            DFS(idx + 1, pSum);
+        }
+    }
+
+    DFS(0, sum)
+
+    return ans;
+}
+
+let arr = [81, 58, 42, 33, 61];
+console.log(solution(259, arr));
