@@ -121,5 +121,12 @@ function solution(c, arr) {
     return ans;
 }
 
-let arr = [81, 58, 42, 33, 61];
-console.log(solution(259, arr));
+// 7번 문제
+// 최대 점수 구하기
+function solution(m, ps, pt){         
+    
+}
+
+let ps=[10, 25, 15, 6, 7];
+let pt=[5, 12, 8, 3, 4]
+console.log(solution(20, ps, pt));
