@@ -149,13 +149,13 @@ function solution(number, times) {
     let arr = Array.from({ length: times }, () => 0);
 
     function DFS(L) {
-        if(L === times){
+        if (L === times) {
             answer.push([...arr]);
-        }else{
-            for(let i=1;i<=number;i++){
-                arr[L]=i;
+        } else {
+            for (let i = 1; i <= number; i++) {
+                arr[L] = i;
                 console.log(arr);
-                DFS(L+1);
+                DFS(L + 1);
             }
         }
     }
@@ -165,9 +165,53 @@ function solution(number, times) {
 
 // 9번 문제
 // 동전교환
-function solution(m, arr){
-    
+function solution(m, arr) {
+    let cnt = 0;
+    let ans = Number.MAX_SAFE_INTEGER;
+    function DFS(L, pSum) {
+
+        if (pSum > m) return;
+        if (L >= ans) return;
+        if (pSum === m) {
+            // 조건 충족시 cnt ++;
+            // cnt 중에서 제일 작은 cnt로 덮어쓰기 Math.min(ans,cnt)
+            ans = Math.min(ans, L);
+        } else {
+            // arr.length회 반복
+            for (let i = 0; i < arr.length; i++) {
+                DFS(L + 1, pSum + arr[i]);
+            }
+        }
+    }
+    DFS(0, 0);
+
+    return ans;
 }
 
-let arr=[1, 2, 5];
-console.log(solution(15, arr));
+// 10번 문제
+// 순열 구하기
+// 아오 재귀함수 너무 어렵다
+function solution(m, arr) {
+    
+    let answer = [];
+    let temp = [];
+    let cnt = 0;
+    for (let i = 0; i < arr.length; i++) {
+        temp.push(arr[i])
+        for (let j = 0; j < arr.length; j++) {
+            if (i === j) {
+                continue;
+            } else {
+                temp.push(arr[j]);
+                console.log(temp);
+                cnt++;
+                temp = [];
+            }
+        }
+    }
+
+    return cnt;
+}
+
+let arr = [3, 6, 9];
+console.log(solution(2, arr));
