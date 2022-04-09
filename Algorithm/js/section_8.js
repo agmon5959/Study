@@ -123,10 +123,51 @@ function solution(c, arr) {
 
 // 7번 문제
 // 최대 점수 구하기
-function solution(m, ps, pt){         
+function solution(m, ps, pt) {
+    let answer = Number.MIN_SAFE_INTEGER;
+    let n = ps.length;
+    function DFS(L, sum, time) {
+        if (time > m) return;
+        if (L === n) {
+            answer = Math.max(answer, sum);
+        }
+        else {
+            DFS(L + 1, sum + ps[L], time + pt[L]);
+            DFS(L + 1, sum, time);
+        }
+    }
+
+    DFS(0, 0, 0);
+    return answer;
+}
+
+
+// 8번 문제
+// 중복순열
+function solution(number, times) {
+    let answer = [];
+    let arr = Array.from({ length: times }, () => 0);
+
+    function DFS(L) {
+        if(L === times){
+            answer.push([...arr]);
+        }else{
+            for(let i=1;i<=number;i++){
+                arr[L]=i;
+                console.log(arr);
+                DFS(L+1);
+            }
+        }
+    }
+    DFS(0);
+    console.log(answer);
+}
+
+// 9번 문제
+// 동전교환
+function solution(m, arr){
     
 }
 
-let ps=[10, 25, 15, 6, 7];
-let pt=[5, 12, 8, 3, 4]
-console.log(solution(20, ps, pt));
+let arr=[1, 2, 5];
+console.log(solution(15, arr));
