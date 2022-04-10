@@ -190,27 +190,29 @@ function solution(m, arr) {
 
 // 10번 문제
 // 순열 구하기
-// 아오 재귀함수 너무 어렵다
-function solution(m, arr) {
-    
-    let answer = [];
-    let temp = [];
-    let cnt = 0;
-    for (let i = 0; i < arr.length; i++) {
-        temp.push(arr[i])
-        for (let j = 0; j < arr.length; j++) {
-            if (i === j) {
-                continue;
-            } else {
-                temp.push(arr[j]);
-                console.log(temp);
-                cnt++;
-                temp = [];
+
+function solution(m, arr){         
+    let answer=[];
+    n=arr.length;
+    let ch=Array.from({length:n}, ()=>0);
+    let tmp=Array.from({length:m}, ()=>0);;
+    function DFS(L){
+        if(L===m){
+            answer.push(tmp.slice()); 
+        }
+        else{
+            for(let i=0; i<n; i++){
+                if(ch[i]===0){
+                    ch[i]=1;
+                    tmp[L]=arr[i];
+                    DFS(L+1);
+                    ch[i]=0;
+                }
             }
         }
     }
-
-    return cnt;
+    DFS(0);
+    return answer;
 }
 
 let arr = [3, 6, 9];
