@@ -188,31 +188,42 @@ function solution(m, arr) {
     return ans;
 }
 
-// 10번 문제
-// 순열 구하기
-
-function solution(m, arr){         
-    let answer=[];
-    n=arr.length;
-    let ch=Array.from({length:n}, ()=>0);
-    let tmp=Array.from({length:m}, ()=>0);;
-    function DFS(L){
-        if(L===m){
-            answer.push(tmp.slice()); 
-        }
-        else{
-            for(let i=0; i<n; i++){
-                if(ch[i]===0){
-                    ch[i]=1;
-                    tmp[L]=arr[i];
-                    DFS(L+1);
-                    ch[i]=0;
-                }
-            }
-        }
+// 순열과 조합
+// 집에가서 천천히 로직 따라가보기.
+function solution(number, arr) {
+    let ans = [];
+    // 1이라면 한 개씩 반환
+    if (number === 1) {
+        return arr.map((dr) => [dr]);
     }
-    DFS(0);
-    return answer;
+    arr.forEach((fixed, idx, origin) => {
+        let rest = []; // 배열의 원소 중 하나를 고른 나머지들을 rest 변수에 담아준다.
+
+        // 1) 조합
+        // rest = origin.slice(idx + 1);
+
+        // 2) 중복조합
+        // rest = origin.slice(idx);
+
+        // 3) 순열
+        // rest = [...origin.splice(0,idx) , ...origin.slice(idx+1)];
+
+        // 4) 중복순열
+        rest = origin;
+        
+
+        let combination = solution(number - 1, rest); // 나머지에 대한 조합 값
+
+        let attached = combination.map((iter) => { // 나온 결과 값에 대해 fixed값 붙여주기
+            return [fixed, ...iter];
+        })
+        
+        ans.push(...attached); // 리턴 배열에 넣어주기
+    });
+
+
+    return ans;
+
 }
 
 let arr = [3, 6, 9];
