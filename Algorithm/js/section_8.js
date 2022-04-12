@@ -200,19 +200,21 @@ function solution(number, arr) {
         let rest = []; // 배열의 원소 중 하나를 고른 나머지들을 rest 변수에 담아준다.
 
         // 1) 조합
-        // rest = origin.slice(idx + 1);
+        rest = origin.slice(idx + 1); // 파라미터로 들어온 배열의 0번째 인덱스를 잘라서 rest에 넣는다.
 
         // 2) 중복조합
         // rest = origin.slice(idx);
 
         // 3) 순열
-        // rest = [...origin.splice(0,idx) , ...origin.slice(idx+1)];
+        // rest = [...origin.slice(0,idx) , ...origin.slice(idx+1)];
 
         // 4) 중복순열
-        rest = origin;
+        // rest = origin;
         
 
         let combination = solution(number - 1, rest); // 나머지에 대한 조합 값
+        console.log(" fixed >> ",fixed);
+        console.log(" combination >> ",combination);
 
         let attached = combination.map((iter) => { // 나온 결과 값에 대해 fixed값 붙여주기
             return [fixed, ...iter];
@@ -226,5 +228,5 @@ function solution(number, arr) {
 
 }
 
-let arr = [3, 6, 9];
-console.log(solution(2, arr));
+let arr = [1,2,3,4];
+console.log(solution(3, arr));
