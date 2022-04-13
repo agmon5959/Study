@@ -234,6 +234,7 @@ function solution(number, arr) {
 function solution(n) {
     let ans;
     function DFS(param) {
+        
         if (param == 1) {
             return 1;
         } else {
