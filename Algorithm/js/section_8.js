@@ -201,26 +201,23 @@ function solution(number, arr) {
 
         // 1) 조합
         rest = origin.slice(idx + 1); // 파라미터로 들어온 배열의 0번째 인덱스를 잘라서 rest에 넣는다.
-
         // 2) 중복조합
         // rest = origin.slice(idx);
-
         // 3) 순열
         // rest = [...origin.slice(0,idx) , ...origin.slice(idx+1)];
-
         // 4) 중복순열
         // rest = origin;
-        
+
 
         let combination = solution(number - 1, rest); // 나머지에 대한 조합 값
-        console.log(" fixed >> ",fixed);
-        console.log(" combination >> ",combination);
+        console.log('fixed ->', fixed, 'rest ->', rest, 'combination ->', combination);
 
         let attached = combination.map((iter) => { // 나온 결과 값에 대해 fixed값 붙여주기
             return [fixed, ...iter];
         })
-        
+
         ans.push(...attached); // 리턴 배열에 넣어주기
+        console.log('attached -> ', attached);
     });
 
 
@@ -228,5 +225,23 @@ function solution(number, arr) {
 
 }
 
-let arr = [1,2,3,4];
-console.log(solution(3, arr));
+// 11번 문제
+// 팩토리얼
+
+// return param * DFS(param-1) 부분에서 ans = param * DFDS(param-1)을 해줘서 답이 안나왔음.... ㅠ_ㅠ
+// return => 호출부로 반환하는 것 ... ! , ans에는 왜 답이 안들어갔을까 ? => 해당 함수에서 Return은
+// param이 1일때만 해주는 return이 전부라서 .. !
+function solution(n) {
+    let ans;
+    function DFS(param) {
+        if (param == 1) {
+            return 1;
+        } else {
+            return param * DFS(param - 1);
+        }
+
+    }
+    ans = DFS(n);
+    return ans;
+}
+console.log(solution(5));
