@@ -238,6 +238,8 @@ function solution(n) {
         if (param == 1) {
             return 1;
         } else {
+            // DFS함수의 리턴은 DFS 함수로 오기 때문에
+            // 그 함수의 리턴값 * param으로 계속 계산식을 타게 된다.
             return param * DFS(param - 1);
         }
 
@@ -245,4 +247,20 @@ function solution(n) {
     ans = DFS(n);
     return ans;
 }
-console.log(solution(5));
+
+// 12번 문제
+// 조합수(메모이제이션)
+function solution(n, r){         
+    let answer=[];
+    let dy= Array.from(Array(35), () => Array(35).fill(0));
+    
+    function DFS(n, r){
+        if(dy[n][r]>0) return dy[n][r];
+        if(n===r || r===0) return 1;
+        else return dy[n][r]=DFS(n-1, r-1)+DFS(n-1, r);
+    }
+    answer=DFS(n, r);
+    return answer;
+}
+
+console.log(solution(5, 3));
