@@ -252,10 +252,12 @@ function solution(n) {
 // 조합수(메모이제이션)
 function solution(n, r){         
     let answer=[];
+    // dy > 메모이제이션을 활용하기 위한 배열
     let dy= Array.from(Array(35), () => Array(35).fill(0));
     
     function DFS(n, r){
-        if(dy[n][r]>0) return dy[n][r];
+        
+        if(dy[n][r]>0) return dy[n][r]; // 메모리제이션 사용
         if(n===r || r===0) return 1;
         else return dy[n][r]=DFS(n-1, r-1)+DFS(n-1, r);
     }
@@ -263,4 +265,10 @@ function solution(n, r){
     return answer;
 }
 
-console.log(solution(5, 3));
+// 13번 문제
+// 수열 추측하기
+function solution(n, f){         
+   
+}
+
+console.log(solution(4, 16));
