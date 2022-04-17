@@ -47,7 +47,8 @@ function solution(n) {
 }
 
 // 4번 문제
-// 부분집합 구하기
+// 부분집합 구하기 >> 조합 문제 
+// 근데 이게 진짜 병신같은게 ch라는 체크배열을 따로 만들어줌 ;
 function solution(n) {
     let answer = [];
     let ch = Array.from({ length: n + 1 }, () => 0);
