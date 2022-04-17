@@ -189,43 +189,6 @@ function solution(m, arr) {
     return ans;
 }
 
-// 순열과 조합
-// 집에가서 천천히 로직 따라가보기.
-function solution(number, arr) {
-    let ans = [];
-    // 1이라면 한 개씩 반환
-    if (number === 1) {
-        return arr.map((dr) => [dr]);
-    }
-    arr.forEach((fixed, idx, origin) => {
-        let rest = []; // 배열의 원소 중 하나를 고른 나머지들을 rest 변수에 담아준다.
-
-        // 1) 조합
-        rest = origin.slice(idx + 1); // 파라미터로 들어온 배열의 0번째 인덱스를 잘라서 rest에 넣는다.
-        // 2) 중복조합
-        // rest = origin.slice(idx);
-        // 3) 순열
-        // rest = [...origin.slice(0,idx) , ...origin.slice(idx+1)];
-        // 4) 중복순열
-        // rest = origin;
-
-
-        let combination = solution(number - 1, rest); // 나머지에 대한 조합 값
-        console.log('fixed ->', fixed, 'rest ->', rest, 'combination ->', combination);
-
-        let attached = combination.map((iter) => { // 나온 결과 값에 대해 fixed값 붙여주기
-            return [fixed, ...iter];
-        })
-
-        ans.push(...attached); // 리턴 배열에 넣어주기
-        console.log('attached -> ', attached);
-    });
-
-
-    return ans;
-
-}
-
 // 11번 문제
 // 팩토리얼
 
@@ -235,7 +198,7 @@ function solution(number, arr) {
 function solution(n) {
     let ans;
     function DFS(param) {
-        
+
         if (param == 1) {
             return 1;
         } else {
@@ -251,25 +214,57 @@ function solution(n) {
 
 // 12번 문제
 // 조합수(메모이제이션)
-function solution(n, r){         
-    let answer=[];
+function solution(n, r) {
+    let answer = [];
     // dy > 메모이제이션을 활용하기 위한 배열
-    let dy= Array.from(Array(35), () => Array(35).fill(0));
-    
-    function DFS(n, r){
-        
-        if(dy[n][r]>0) return dy[n][r]; // 메모리제이션 사용
-        if(n===r || r===0) return 1;
-        else return dy[n][r]=DFS(n-1, r-1)+DFS(n-1, r);
+    let dy = Array.from(Array(35), () => Array(35).fill(0));
+
+    function DFS(n, r) {
+
+        if (dy[n][r] > 0) return dy[n][r]; // 메모리제이션 사용
+        if (n === r || r === 0) return 1;
+        else return dy[n][r] = DFS(n - 1, r - 1) + DFS(n - 1, r);
     }
-    answer=DFS(n, r);
+    answer = DFS(n, r);
     return answer;
 }
 
-// 13번 문제
-// 수열 추측하기
-function solution(n, f){         
-   
-}
+// 순열과 조합
+function solution(number, arr) {
 
-console.log(solution(4, 16));
+    /*
+        rest에 범위를 추리는 방법에 따라서 조합/중복조합/순열/중복순열이 결정된다.
+        순열은 현재 방문한 i번째 아이템을 제외한 나머지 아이템들이 모두 rest에 올 수 있음
+        조합은 현재 방문한 i번째 아이템의 뒤에 있는 아이템들만 rest에 올 수 있음.
+        조합에서는 [i-1, i]과 [i, i-1]이 동일한 경우의 수이므로 현재 아이템보다 앞서 선택했던 아이템은 다시 선택할 필요가 없기 때문.
+    */
+
+    let ans = [];
+    
+    if (number === 1) {
+        return arr.map((dr) => [dr]);
+    }
+    arr.forEach((fixed, idx, origin) => {
+        let rest = []; // 배열의 원소 중 하나를 고른 나머지들을 rest 변수에 담아준다.
+        // 1) 조합
+        rest = origin.slice(idx + 1); // 파라미터로 들어온 배열의 0번째 인덱스를 잘라서 rest에 넣는다.
+        // 2) 중복조합
+        // rest = origin.slice(idx);
+        // 3) 순열
+        // rest = [...origin.slice(0,idx) , ...origin.slice(idx+1)];
+        // 4) 중복순열
+        // rest = origin;
+        let combination = solution(number - 1, rest); // 나머지에 대한 조합 값
+
+        let attached = combination.map((iter) => { // 나온 결과 값에 대해 fixed값 붙여주기
+            return [fixed, ...iter];
+        })
+        ans.push(...attached); // 리턴 배열에 넣어주기
+    });
+
+
+    return ans;
+
+}
+let arr = [1, 2, 3, 4];
+console.log(solution(3, arr));
