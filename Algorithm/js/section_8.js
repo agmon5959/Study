@@ -276,11 +276,13 @@ function solution(n, f){
     let ch=Array.from({length:n+1}, ()=>0);
     let p=Array.from({length:n}, ()=>0);
     let b=Array.from({length:n}, ()=>0);
+
     function combi(n, r){
         if(dy[n][r]>0) return dy[n][r];
         if(n===r || r===0) return 1;
         else return dy[n][r]=combi(n-1, r-1)+combi(n-1, r);
     }
+
     function DFS(L, sum){
         if(flag) return;
         if(L===n && sum===f){
@@ -298,11 +300,37 @@ function solution(n, f){
             }
         }
     }
+
     for(let i=0; i<n; i++){
         b[i]=combi(n-1, i);
     }
+
     DFS(0, 0);
+
     return answer;
 }
 
-console.log(solution(4, 16));
+// 15번 문제
+// 수들의 조합
+function solution(n, k, arr, m){         
+    let answer=0;
+    function DFS(L, s, sum){
+       if(L===k){
+            if(sum%m===0) answer++;
+       }
+       else{
+           for(let i=s; i<n; i++){
+               DFS(L+1, i+1, sum+arr[i]);
+           }
+       }
+    }
+
+    DFS(0, 0, 0);
+    return answer;
+}
+
+let arr=[2, 4, 5, 8, 12];
+console.log(solution(5, 3, arr, 6));
+
+// DFS 재귀함수는 다시 공부가 필요할 것 같음.
+// 해당 방법으로 4가지를 다 외우는 것 보다 그냥 하나를 이해해서 외우는게 나을 것 같음.
