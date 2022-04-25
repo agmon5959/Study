@@ -30,4 +30,38 @@ function solution(id_list, report, k) {
     }
 }
 
-console.log(solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo", "apeach frodo", "frodo neo", "muzi neo", "apeach muzi"], 2));
+// console.log(solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo", "apeach frodo", "frodo neo", "muzi neo", "apeach muzi"], 2));
+
+// 프로그래머스 1단계
+// 숫자 문자열과 영단어
+// 좀더 깔끔한 풀이가 많았음. 정규식을 알고있으면 간결하게 풀 수 있을 듯.
+function solution(s) {
+    var answer = 0;
+    const numberSet = ["zero", "one", "two", "three", "four",
+        "five", "six", "seven", "eight", "nine"]
+    const arr = new Array();
+    let charArr = new Array();
+
+    if (!isNaN(Number(s))) {
+        return Number(s);
+    } else {
+        for (let x of s) {
+            if (!isNaN(Number(x))) {
+                arr.push(x);
+            } else {
+                // 문자발견
+                charArr.push(x);
+                if (charArr.length >= 3) {
+                    numberSet.forEach((iter, idx) => {
+                        if (charArr.join('') === iter) {
+                            arr.push(idx);
+                            charArr = [];
+                        }
+                    })
+                }
+            }
+        }
+    }
+    return Number(arr.join(""));
+}
+console.log(solution("123"));
