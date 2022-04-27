@@ -77,7 +77,6 @@ function solution(s) {
 
     return Number(answer);
 }
-console.log(solution("onetwo3four56seven"));
 
 // 숫자 문자열과 영단어 
 // 정규표현식 풀이
@@ -96,3 +95,18 @@ function solution(s) {
     return parseInt(s);
     
 }
+console.log(solution("onetwo3four56seven"));
+
+
+
+
+
+
+
+
+function solution(string) {
+
+   
+    
+}
+console.log(solution("...!@BaT#*..y.abcdefghijklm"));
