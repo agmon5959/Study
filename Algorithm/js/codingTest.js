@@ -110,3 +110,31 @@ function solution(string) {
     
 }
 console.log(solution("...!@BaT#*..y.abcdefghijklm"));
+
+// 크레인 인형뽑기
+function solution(board, moves) {
+    let score = 0;
+    let value = undefined;
+    let result = [];
+    let cnt = 0;
+    
+    for(let i=0;i<moves.length;i++){
+        for(let j=0;j<board.length;j++){
+            if(board[j][moves[i]-1]!==0 && cnt === i){
+                cnt++;
+                console.log(cnt)
+                if(result[result.length-1]===board[j][moves[i]-1]){
+                    result.pop()
+                    score+=2;
+                }else{
+                value=board[j][moves[i]-1];
+                result.push(value)
+                }
+                board[j][moves[i]-1]=0;
+            }
+        }
+    }
+    console.log(score)
+    
+    return score;
+}
