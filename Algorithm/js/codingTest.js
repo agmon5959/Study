@@ -70,7 +70,7 @@ function solution(s) {
     let numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
     var answer = s;
 
-    for(let i=0; i< numbers.length; i++) {
+    for (let i = 0; i < numbers.length; i++) {
         let arr = answer.split(numbers[i]);
         answer = arr.join(i);
     }
@@ -82,18 +82,10 @@ function solution(s) {
 // 정규표현식 풀이
 function solution(s) {
 
-    s = s.replace(/zero/gi, 0)
-    .replace(/one/gi, 1)
-    .replace(/two/gi, 2)
-    .replace(/three/gi, 3)
-    .replace(/four/gi, 4)
-    .replace(/five/gi, 5)
-    .replace(/six/gi, 6)
-    .replace(/seven/gi, 7)
-    .replace(/eight/gi, 8)
-    .replace(/nine/gi, 9)
+    s = s.replace(/zero/gi, 0).replace(/one/gi, 1).replace(/two/gi, 2).replace(/three/gi, 3).replace(/four/gi, 4)
+        .replace(/five/gi, 5).replace(/six/gi, 6).replace(/seven/gi, 7).replace(/eight/gi, 8).replace(/nine/gi, 9)
     return parseInt(s);
-    
+
 }
 console.log(solution("onetwo3four56seven"));
 
@@ -106,8 +98,8 @@ console.log(solution("onetwo3four56seven"));
 
 function solution(string) {
 
-   
-    
+
+
 }
 console.log(solution("...!@BaT#*..y.abcdefghijklm"));
 
@@ -117,24 +109,26 @@ function solution(board, moves) {
     let value = undefined;
     let result = [];
     let cnt = 0;
-    
-    for(let i=0;i<moves.length;i++){
-        for(let j=0;j<board.length;j++){
-            if(board[j][moves[i]-1]!==0 && cnt === i){
+
+    for (let i = 0; i < moves.length; i++) {
+        for (let j = 0; j < board.length; j++) {
+            if (board[j][moves[i] - 1] !== 0 && cnt === i) {
                 cnt++;
                 console.log(cnt)
-                if(result[result.length-1]===board[j][moves[i]-1]){
+                if (result[result.length - 1] === board[j][moves[i] - 1]) {
                     result.pop()
-                    score+=2;
-                }else{
-                value=board[j][moves[i]-1];
-                result.push(value)
+                    score += 2;
+                } else {
+                    value = board[j][moves[i] - 1];
+                    result.push(value)
                 }
-                board[j][moves[i]-1]=0;
+                board[j][moves[i] - 1] = 0;
             }
         }
     }
     console.log(score)
-    
+
     return score;
 }
+
+// 
