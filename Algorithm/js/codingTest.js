@@ -135,7 +135,7 @@ function solution(lottos, win_nums) {
         if (win_nums.indexOf(iter) >= 0) {
             high++;
             low++;
-        // 존재하지 않고 0이라면 일치한다고 판단. (high는 최고 순위이기 때문)
+            // 존재하지 않고 0이라면 일치한다고 판단. (high는 최고 순위이기 때문)
         } else if (iter === 0) {
             high++;
         }
@@ -163,4 +163,114 @@ function solution(lottos, win_nums) {
 
     return [rank[maxCount], rank[minCount]];
 }
-solution([44, 1, 0, 0, 31, 25],[31, 10, 45, 1, 6, 19]);
+
+// 키패드 누르기
+// 거리는 행 인덱스의 차이 + 열 인덱스의 차이
+// 객체 다루는 법 더욱 열심히 해야할 듯!
+function solution(numbers, hand) {
+    const a = [];
+
+    const keyPad = {
+        1: [0, 0],
+        2: [0, 1],
+        3: [0, 2],
+        4: [1, 0],
+        5: [1, 1],
+        6: [1, 2],
+        7: [2, 0],
+        8: [2, 1],
+        9: [2, 2],
+        '*': [3, 0],
+        0: [3, 1],
+        '#': [3, 2],
+    }
+
+    function distCalc(cur, target) {
+        let dist = Math.abs(cur[0] - target[0]) + Math.abs(cur[1] - target[1]);
+        return dist;
+    }
+
+    let cur_L = keyPad['*'];
+    let cur_R = keyPad['#'];
+
+    for (let x of numbers) {
+        if (keyPad[x][1] === 0) {
+            cur_L = keyPad[x];
+            a.push("L");
+        } else if (keyPad[x][1] === 2) {
+            cur_R = keyPad[x];
+            a.push("R");
+        } else {
+            // 거리가 같다면 핸드 푸시
+            let leftDist = distCalc(cur_L, keyPad[x]);
+            let rightDist = distCalc(cur_R, keyPad[x]);
+            if(leftDist === rightDist){
+                if(hand === "right"){
+                    cur_R = keyPad[x];
+                    a.push("R");
+                }else{
+                    cur_L = keyPad[x];
+                    a.push("L");
+                }
+            }else if (rightDist < leftDist) {
+                cur_R = keyPad[x];
+                a.push("R");
+            }else{
+                cur_L = keyPad[x];
+                a.push("L");
+            }
+        }
+    }
+
+
+
+    return a.join('');
+}
+console.log(solution([7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2], "left"));
+
+// 음양 더하기
+
+function solution(absolutes, signs) {
+    let answer = 0;
+    absolutes.forEach((iter,idx)=>{
+        if(signs[idx]){
+            answer += iter;
+        }else{
+            answer -= iter;
+        }
+    })
+    return answer;
+}
+
+// 문자열 압축
+function solution(s) {
+    let answer;
+    const length = parseInt(s.length/2);
+    
+    // 문자열을 하나씩 비교
+    // i까지 arr
+    for(let i =1 ; i< length ; i++){
+        let compString = s.substr(0,i);
+        let tempString = s[0];
+        let cnt = 0;
+            for(let j=0;j<length;j++){
+                if(tempString.length !== compString.length){
+                    tempString += s[j];
+                    if(tempString.length === compString.length){
+                        if(tempString === compString){
+                            console.log(tempString)
+                        }
+                    }
+                }else{
+                    if(tempString.length === compString.length){
+                        if(tempString !== compString){
+                            console.log(tempString)
+                        }
+                    }
+                }
+            }
+        }
+    
+    
+    return answer;
+}
