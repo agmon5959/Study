@@ -242,6 +242,15 @@ function solution(absolutes, signs) {
     return answer;
 }
 
+// 내적
+function solution(a, b) {
+    let result=0;
+    for(let i=0; i<a.length;i++){
+        result += a[i]*b[i];
+    }
+    return result;
+}
+
 // 문자열 압축
 function solution(s) {
     let answer;
@@ -274,3 +283,4 @@ function solution(s) {
     
     return answer;
 }
+
