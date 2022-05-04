@@ -253,34 +253,37 @@ function solution(a, b) {
 
 // 문자열 압축
 function solution(s) {
-    let answer;
-    const length = parseInt(s.length/2);
+    let min_len = s.length;
     
-    // 문자열을 하나씩 비교
-    // i까지 arr
-    for(let i =1 ; i< length ; i++){
-        let compString = s.substr(0,i);
-        let tempString = s[0];
-        let cnt = 0;
-            for(let j=0;j<length;j++){
-                if(tempString.length !== compString.length){
-                    tempString += s[j];
-                    if(tempString.length === compString.length){
-                        if(tempString === compString){
-                            console.log(tempString)
-                        }
-                    }
-                }else{
-                    if(tempString.length === compString.length){
-                        if(tempString !== compString){
-                            console.log(tempString)
-                        }
-                    }
-                }
+    for (let i = 1; i <= parseInt(s.length / 2); i++) {
+        let prev = s.substr(0, i);
+        let cnt = 1;
+        let tmp_str = '';
+        
+        for (let k = i; k < s.length; k += i) {
+            const cur = s.substr(k, i);
+            
+            if (prev === cur) cnt++;
+            else {
+                tmp_str += (cnt > 1 ? String(cnt) : '') + prev;
+                cnt = 1;
+                prev = cur;
             }
         }
+        tmp_str += (cnt > 1 ? String(cnt) : '') + prev;
+        
+        min_len = Math.min(min_len, tmp_str.length)
+    }
     
-    
-    return answer;
+    return min_len;
 }
 
+// 프로그래머스 1단계
+// 없는 숫자 더하기
+function solution(numbers) {
+    let add = 45;
+    numbers.forEach((item) => {
+        add -= item
+    });
+    return add;
+}
