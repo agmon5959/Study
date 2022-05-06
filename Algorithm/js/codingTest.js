@@ -299,3 +299,31 @@ function solution(participant, completion) {
         }
     }
 }
+
+// 오픈채팅방
+
+function solution(record) {
+    var answer = [];
+    let userObj={}
+    // 오브젝트 만들어주는 반복문
+    record.forEach((iter)=>{
+        if(iter.split(" ")[0] !== "Leave"){
+            let uid = iter.split(" ")[1];
+            let nickName = iter.split(" ")[2];
+            userObj[uid] = nickName;
+        }
+    })
+
+    // 만들어진 오브젝트를 통해서 값을 구하는 함수
+    record.forEach((iter)=>{
+        let uid = iter.split(" ")[1];
+        
+        if(iter.split(" ")[0] === "Enter"){
+            answer.push(userObj[uid] + "님이 들어왔습니다.");
+        }else if(iter.split(" ")[0] == "Leave"){
+            answer.push(userObj[uid] + "님이 나갔습니다.");
+        }
+    })
+
+    return answer;
+}
