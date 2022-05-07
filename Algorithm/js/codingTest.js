@@ -204,18 +204,18 @@ function solution(numbers, hand) {
             // 거리가 같다면 핸드 푸시
             let leftDist = distCalc(cur_L, keyPad[x]);
             let rightDist = distCalc(cur_R, keyPad[x]);
-            if(leftDist === rightDist){
-                if(hand === "right"){
+            if (leftDist === rightDist) {
+                if (hand === "right") {
                     cur_R = keyPad[x];
                     a.push("R");
-                }else{
+                } else {
                     cur_L = keyPad[x];
                     a.push("L");
                 }
-            }else if (rightDist < leftDist) {
+            } else if (rightDist < leftDist) {
                 cur_R = keyPad[x];
                 a.push("R");
-            }else{
+            } else {
                 cur_L = keyPad[x];
                 a.push("L");
             }
@@ -232,10 +232,10 @@ console.log(solution([7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2], "left"));
 
 function solution(absolutes, signs) {
     let answer = 0;
-    absolutes.forEach((iter,idx)=>{
-        if(signs[idx]){
+    absolutes.forEach((iter, idx) => {
+        if (signs[idx]) {
             answer += iter;
-        }else{
+        } else {
             answer -= iter;
         }
     })
@@ -244,9 +244,9 @@ function solution(absolutes, signs) {
 
 // 내적
 function solution(a, b) {
-    let result=0;
-    for(let i=0; i<a.length;i++){
-        result += a[i]*b[i];
+    let result = 0;
+    for (let i = 0; i < a.length; i++) {
+        result += a[i] * b[i];
     }
     return result;
 }
@@ -254,15 +254,15 @@ function solution(a, b) {
 // 문자열 압축
 function solution(s) {
     let min_len = s.length;
-    
+
     for (let i = 1; i <= parseInt(s.length / 2); i++) {
         let prev = s.substr(0, i);
         let cnt = 1;
         let tmp_str = '';
-        
+
         for (let k = i; k < s.length; k += i) {
             const cur = s.substr(k, i);
-            
+
             if (prev === cur) cnt++;
             else {
                 tmp_str += (cnt > 1 ? String(cnt) : '') + prev;
@@ -271,10 +271,10 @@ function solution(s) {
             }
         }
         tmp_str += (cnt > 1 ? String(cnt) : '') + prev;
-        
+
         min_len = Math.min(min_len, tmp_str.length)
     }
-    
+
     return min_len;
 }
 
@@ -292,9 +292,9 @@ function solution(numbers) {
 function solution(participant, completion) {
     participant.sort()
     completion.sort()
-    
-    for(let i=0;i<participant.length;i++){
-        if(participant[i] !== completion[i]){
+
+    for (let i = 0; i < participant.length; i++) {
+        if (participant[i] !== completion[i]) {
             return participant[i];
         }
     }
@@ -304,10 +304,10 @@ function solution(participant, completion) {
 
 function solution(record) {
     var answer = [];
-    let userObj={}
+    let userObj = {}
     // 오브젝트 만들어주는 반복문
-    record.forEach((iter)=>{
-        if(iter.split(" ")[0] !== "Leave"){
+    record.forEach((iter) => {
+        if (iter.split(" ")[0] !== "Leave") {
             let uid = iter.split(" ")[1];
             let nickName = iter.split(" ")[2];
             userObj[uid] = nickName;
@@ -315,15 +315,132 @@ function solution(record) {
     })
 
     // 만들어진 오브젝트를 통해서 값을 구하는 함수
-    record.forEach((iter)=>{
+    record.forEach((iter) => {
         let uid = iter.split(" ")[1];
-        
-        if(iter.split(" ")[0] === "Enter"){
+
+        if (iter.split(" ")[0] === "Enter") {
             answer.push(userObj[uid] + "님이 들어왔습니다.");
-        }else if(iter.split(" ")[0] == "Leave"){
+        } else if (iter.split(" ")[0] == "Leave") {
             answer.push(userObj[uid] + "님이 나갔습니다.");
         }
     })
 
     return answer;
+}
+
+// 124 나라
+// 이건 아직도 좀 이해가 안된다 ,, 수학적 지식이 너무 부족함을 느낀다 :(
+function solution(n) {
+    var answer = '';
+    const arr = ['4', '1', '2'];
+    while (n > 0) {
+        answer = arr[n % 3] + answer;
+        n = Math.floor((n - 1) / 3);
+    }
+
+
+    return answer;
+}
+
+// 최대 공약수
+function getGCD(num1, num2) {
+    let gcd = 1;
+    for (let i = 2; i <= Math.min(num1, num2); i++) {
+        if (num1 % i === 0 && num2 % i === 0) {
+            gcd = i;
+        }
+    }
+    return gcd;
+}
+
+// 최소 공배수
+function getLCM(num1, num2) {
+    let lcm = 1;
+    while (true) {
+        if ((lcm % num1 === 0) && (lcm % num2 === 0)) {
+            break;
+        }
+        lcm++;
+    }
+    return lcm;
+}
+
+// 유클리드 호제법 (최대공약수와 최소공배수)
+function solution5(num1, num2) {
+    const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
+    const lcm = (a, b) => a * b / gcd(a, b);
+    return [gcd(num1, num2), lcm(num1, num2)];
+}
+
+
+console.log(solution5(60, 48))
+
+
+
+// 거리두기
+function solution(arr) {
+    
+    let ansArr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        ansArr.push(findDist(i));
+    }
+
+    return ansArr;
+
+
+    function findDist(i) {
+        const dx = [-1, 1, 0, 0];
+        const dy = [0, 0, -1, 1];
+        let flag = true;
+        let cnt = 0;
+
+        for (let j = 0; j < arr.length; j++) {
+            for (let k = 0; k < arr.length; k++) {
+                if (arr[i][j][k] === "X") { // X인 경우
+                    continue;
+                } else if (arr[i][j][k] === "P") {
+                    // P인 경우 주위 P가 하나라도 있으면 flag = false
+                    for (let l = 0; l < arr.length; l++) {
+                        let moveX = j + dx[l];
+                        let moveY = k + dy[l];
+                        // 접근불가 인덱스가 아닌 경우에만 아래 조건문을 타도록 한다.
+                        if (arr[i][moveX] !== undefined && arr[i][moveX][moveY] !== undefined) {
+                            // debugger
+                            // P를 발견한 경우 flag는 false
+                            if (arr[i][moveX][moveY] === "P") {
+                                flag = false;
+                            }
+                            if (flag === false) {
+                                return 0
+                            }
+                        }
+
+                    }
+                } else {    // O인 경우
+                    // 내 주위 P가 2 이상이라면 return 0
+                    cnt = 0;
+                    for (let l = 0; l < arr.length; l++) {
+
+                        let moveX = j + dx[l];
+                        let moveY = k + dy[l];
+                        // 접근불가 인덱스가 아닌 경우에만 아래 조건문을 타도록 한다.
+                        if (arr[i][moveX] !== undefined && arr[i][moveX][moveY] !== undefined) {
+                            debugger
+                            // P를 발견한 경우 flag는 false
+                            if (arr[i][moveX][moveY] === "P") {
+                                cnt++;
+                            }
+                            if (cnt >= 2) {
+                                return 0
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return 1
+    }
 }

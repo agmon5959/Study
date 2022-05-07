@@ -48,7 +48,6 @@ function solution(n) {
 
 // 4번 문제
 // 부분집합 구하기 >> 조합 문제 
-// 근데 이게 진짜 병신같은게 ch라는 체크배열을 따로 만들어줌 ;
 function solution(n) {
     let answer = [];
     let ch = Array.from({ length: n + 1 }, () => 0);
@@ -230,7 +229,7 @@ function solution(n, r) {
 }
 
 // 순열과 조합
-function solution(number, arr) {
+function findCombi(number, arr) {
 
     /*
         rest에 범위를 추리는 방법에 따라서 조합/중복조합/순열/중복순열이 결정된다.
@@ -249,12 +248,12 @@ function solution(number, arr) {
         // 1) 조합
         rest = origin.slice(idx + 1); // 파라미터로 들어온 배열의 0번째 인덱스를 잘라서 rest에 넣는다.
         // 2) 중복조합
-        // rest = origin.slice(idx);
+        rest = origin.slice(idx);
         // 3) 순열
-        // rest = [...origin.slice(0,idx) , ...origin.slice(idx+1)];
+        rest = [...origin.slice(0,idx) , ...origin.slice(idx+1)];
         // 4) 중복순열
-        // rest = origin;
-        let combination = solution(number - 1, rest); // 나머지에 대한 조합 값
+        rest = origin;
+        let combination = findCombi(number - 1, rest); // 나머지에 대한 조합 값
 
         let attached = combination.map((iter) => { // 나온 결과 값에 대해 fixed값 붙여주기
             return [fixed, ...iter];
@@ -329,8 +328,9 @@ function solution(n, k, arr, m){
     return answer;
 }
 
-let arr=[2, 4, 5, 8, 12];
-console.log(solution(5, 3, arr, 6));
+// let arr=[2, 4, 5, 8, 12];
+// console.log(findCombi(3, arr));
 
 // DFS 재귀함수는 다시 공부가 필요할 것 같음.
 // 해당 방법으로 4가지를 다 외우는 것 보다 그냥 하나를 이해해서 외우는게 나을 것 같음.
+
