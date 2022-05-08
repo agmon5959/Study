@@ -373,13 +373,13 @@ function solution5(num1, num2) {
 }
 
 
-console.log(solution5(60, 48))
+// console.log(solution5(60, 48))
 
 
 
 // 거리두기
-function solution(arr) {
-    
+function rrr(arr) {
+
     let ansArr = [];
 
     for (let i = 0; i < arr.length; i++) {
@@ -406,7 +406,8 @@ function solution(arr) {
                         let moveY = k + dy[l];
                         // 접근불가 인덱스가 아닌 경우에만 아래 조건문을 타도록 한다.
                         if (arr[i][moveX] !== undefined && arr[i][moveX][moveY] !== undefined) {
-                            // debugger
+                            debugger
+                            debugger
                             // P를 발견한 경우 flag는 false
                             if (arr[i][moveX][moveY] === "P") {
                                 flag = false;
@@ -421,11 +422,11 @@ function solution(arr) {
                     // 내 주위 P가 2 이상이라면 return 0
                     cnt = 0;
                     for (let l = 0; l < arr.length; l++) {
-
                         let moveX = j + dx[l];
                         let moveY = k + dy[l];
                         // 접근불가 인덱스가 아닌 경우에만 아래 조건문을 타도록 한다.
                         if (arr[i][moveX] !== undefined && arr[i][moveX][moveY] !== undefined) {
+                            debugger
                             debugger
                             // P를 발견한 경우 flag는 false
                             if (arr[i][moveX][moveY] === "P") {
@@ -444,3 +445,31 @@ function solution(arr) {
         return 1
     }
 }
+// console.log(rrr([["POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"], ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"], ["PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"], ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"], ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]]))
+
+// BFS 기본구현
+function BFS(graph, startNode){
+    const visited = [];
+    let needVisit = [];
+    needVisit.push(startNode);
+    while (needVisit.length !== 0) {
+        const node = needVisit.shift();
+        if (!visited.includes(node)) {
+            visited.push(node);
+            needVisit = [...needVisit, ...graph[node]];
+        }
+    }
+    return visited;
+}
+console.log(BFS(graph = {
+    A: ["B", "C"],
+    B: ["A", "D"],
+    C: ["A", "G", "H", "I"],
+    D: ["B", "E", "F"],
+    E: ["D"],
+    F: ["D"],
+    G: ["C"],
+    H: ["C"],
+    I: ["C", "J"],
+    J: ["I"]
+  }, "A"));
