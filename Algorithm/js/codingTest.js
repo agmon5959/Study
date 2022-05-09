@@ -473,3 +473,35 @@ console.log(BFS(graph = {
     I: ["C", "J"],
     J: ["I"]
   }, "A"));
+
+// 모의고사
+function solution(answers) {
+    let answer;
+    // 1,2,3,4,5
+    // 2,1,2,3,2,4,2,5
+    // 3,3,1,1,2,2,4,4,5,5
+    const one = [1,2,3,4,5];
+    let oneScore=0
+    const two = [2,1,2,3,2,4,2,5];
+    let twoScore=0
+    const three = [3,3,1,1,2,2,4,4,5,5];
+    let threeScore = 0;
+    
+    for(let i=0;i<answers.length;i++){
+        if(answers[i] === one[i]){
+            oneScore++;
+        }
+        if(answers[i] === two[i]){
+            twoScore++;
+        }
+        if(answers[i] === three[i]){
+            threeScore++;
+        }
+    }
+    
+    // 가장 높은 점수를 받은 사람이 여러명인 경우
+    
+    
+    return answer;
+}
+
