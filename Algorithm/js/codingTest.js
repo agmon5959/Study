@@ -476,32 +476,101 @@ console.log(BFS(graph = {
 
 // 모의고사
 function solution(answers) {
-    let answer;
-    // 1,2,3,4,5
-    // 2,1,2,3,2,4,2,5
-    // 3,3,1,1,2,2,4,4,5,5
+    let answer = [];
     const one = [1,2,3,4,5];
     let oneScore=0
     const two = [2,1,2,3,2,4,2,5];
     let twoScore=0
     const three = [3,3,1,1,2,2,4,4,5,5];
+
+    
     let threeScore = 0;
+    let oneIdx = 0;
+    let twoIdx = 0;
+    let threeIdx = 0;
     
     for(let i=0;i<answers.length;i++){
-        if(answers[i] === one[i]){
+        
+        if(oneIdx >= one.length){
+            oneIdx = 0;
+        }
+        if(twoIdx >= two.length){
+            twoIdx = 0;
+        }
+        if(threeIdx >= three.length){
+            threeIdx = 0;
+        }
+        
+        
+        if(answers[i] === one[oneIdx]){
             oneScore++;
         }
-        if(answers[i] === two[i]){
+        if(answers[i] === two[twoIdx]){
             twoScore++;
         }
-        if(answers[i] === three[i]){
+        if(answers[i] === three[threeIdx]){
             threeScore++;
+        }
+        
+        oneIdx++;
+        twoIdx++;
+        threeIdx++;
+    }
+    
+    const scoreArr = [
+        [1,oneScore],
+        [2,twoScore],
+        [3,threeScore],
+    ]
+    
+    scoreArr.sort((a,b)=>{
+        if(a[0] > a[0]){
+            return -1;
+        }else if( a[0] < b[0]){
+            return 1;
+        }else if( a[1] > b[1]){
+            return -1;
+        }else if( a[1] < b[1]){
+            return 1;
+        }
+    })
+    
+    // 동점자 구하기
+    let cnt = 0;
+    for(let i =0; i<scoreArr.length; i++){
+        if(scoreArr[i+1] !== undefined){
+            if(scoreArr[0][1] === scoreArr[i+1][1]){
+                cnt++;
+            }
         }
     }
     
-    // 가장 높은 점수를 받은 사람이 여러명인 경우
-    
+    for( let i =0; i<=cnt; i++){
+        answer.push(scoreArr[i][0]);
+    }
     
     return answer;
 }
 
+// 모의고사 다른사람 풀이
+function solution(answers) {
+    var answer = [];
+    var a1 = [1, 2, 3, 4, 5];
+    var a2 = [2, 1, 2, 3, 2, 4, 2, 5]
+    var a3 = [ 3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
+
+    debugger
+    var a1c = answers.filter((a,i)=> a === a1[i%a1.length]).length;
+    var a2c = answers.filter((a,i)=> a === a2[i%a2.length]).length;
+    var a3c = answers.filter((a,i)=> a === a3[i%a3.length]).length;
+    var max = Math.max(a1c,a2c,a3c);
+
+    if (a1c === max) {answer.push(1)};
+    if (a2c === max) {answer.push(2)};
+    if (a3c === max) {answer.push(3)};
+
+
+    return answer;
+}
+
+console.log(solution([1,3,2,4,2]));
