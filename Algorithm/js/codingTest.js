@@ -559,12 +559,17 @@ function solution(answers) {
     var a2 = [2, 1, 2, 3, 2, 4, 2, 5]
     var a3 = [ 3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
 
-    debugger
+    // 모듈러 연산을 통해서 반복되는 인덱스를 구한다.
+    // a1의 경우 0~4 % a1.length를 하게되면 모듈러 연산이라 a1.length 전 값까지는 기존 값이 들어오고
+    // 그 이후 a1.length를 넘어가는 나머지가 return 되기때문에 반복적인 인덱스를 구할 수 있다.
+    // 또한 filter의 length를 통해서 일치하는 항목들의 길이를 구해서 해당 길이를 통해 얼마나 일치하는지 판단한다.
     var a1c = answers.filter((a,i)=> a === a1[i%a1.length]).length;
     var a2c = answers.filter((a,i)=> a === a2[i%a2.length]).length;
     var a3c = answers.filter((a,i)=> a === a3[i%a3.length]).length;
+    // a1c , a2c , a3c 중 가장 큰 값을 구하고
     var max = Math.max(a1c,a2c,a3c);
 
+    // 가장 큰 값을 answer에 push하도록 한다.
     if (a1c === max) {answer.push(1)};
     if (a2c === max) {answer.push(2)};
     if (a3c === max) {answer.push(3)};
@@ -574,3 +579,44 @@ function solution(answers) {
 }
 
 console.log(solution([1,3,2,4,2]));
+
+// 체육복
+// 해당 문제는 다시 풀어보기.. !
+// 테스트 케이스에서 오류가 잡혔음.
+function solution(n, lost, reserve) {
+
+    var answer = 0;
+
+    // 학생 수 만큼 배열의 가지고 있는 유니폼 수를 1로 초기화
+    let hasUniform = new Array(n).fill(1);
+
+    // 잃어버린 학생은 -1 을 해줌
+    for (let i = 0; i < lost.length; i++) {
+        hasUniform[lost[i] - 1]--;
+    }
+
+    // 여벌이 있으면 +1 을 해줌
+    for (let i = 0; i < reserve.length; i++) {
+        hasUniform[reserve[i] - 1]++;
+    }
+
+    for (let i = 0; i < hasUniform.length; i++) {
+        // 유니폼이 없을 때 좌우 학생이 유니폼이 있을경우 빌려줌
+        if (hasUniform[i] === 0) {
+            if (hasUniform[i - 1] === 2) {
+                hasUniform[i]++;
+                hasUniform[i - 1]--;
+            } else if (hasUniform[i + 1] === 2) {
+                hasUniform[i]++;
+                hasUniform[i + 1]--;
+            }
+        }
+
+        // 유니폼이 1개이상 있으면 통과
+        if (hasUniform[i] >= 1) {
+            answer++;
+        }
+    }
+
+    return answer;
+}
