@@ -641,3 +641,4 @@ function solution(N, stages) {
     //Array.map() : 배열을 조건에 맞게 변환
     return answer.map(a => a[0]);
 }
+
