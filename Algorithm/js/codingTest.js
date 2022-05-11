@@ -448,7 +448,7 @@ function rrr(arr) {
 // console.log(rrr([["POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"], ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"], ["PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"], ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"], ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]]))
 
 // BFS 기본구현
-function BFS(graph, startNode){
+function BFS(graph, startNode) {
     const visited = [];
     let needVisit = [];
     needVisit.push(startNode);
@@ -472,83 +472,83 @@ console.log(BFS(graph = {
     H: ["C"],
     I: ["C", "J"],
     J: ["I"]
-  }, "A"));
+}, "A"));
 
 // 모의고사
 function solution(answers) {
     let answer = [];
-    const one = [1,2,3,4,5];
-    let oneScore=0
-    const two = [2,1,2,3,2,4,2,5];
-    let twoScore=0
-    const three = [3,3,1,1,2,2,4,4,5,5];
+    const one = [1, 2, 3, 4, 5];
+    let oneScore = 0
+    const two = [2, 1, 2, 3, 2, 4, 2, 5];
+    let twoScore = 0
+    const three = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
 
-    
+
     let threeScore = 0;
     let oneIdx = 0;
     let twoIdx = 0;
     let threeIdx = 0;
-    
-    for(let i=0;i<answers.length;i++){
-        
-        if(oneIdx >= one.length){
+
+    for (let i = 0; i < answers.length; i++) {
+
+        if (oneIdx >= one.length) {
             oneIdx = 0;
         }
-        if(twoIdx >= two.length){
+        if (twoIdx >= two.length) {
             twoIdx = 0;
         }
-        if(threeIdx >= three.length){
+        if (threeIdx >= three.length) {
             threeIdx = 0;
         }
-        
-        
-        if(answers[i] === one[oneIdx]){
+
+
+        if (answers[i] === one[oneIdx]) {
             oneScore++;
         }
-        if(answers[i] === two[twoIdx]){
+        if (answers[i] === two[twoIdx]) {
             twoScore++;
         }
-        if(answers[i] === three[threeIdx]){
+        if (answers[i] === three[threeIdx]) {
             threeScore++;
         }
-        
+
         oneIdx++;
         twoIdx++;
         threeIdx++;
     }
-    
+
     const scoreArr = [
-        [1,oneScore],
-        [2,twoScore],
-        [3,threeScore],
+        [1, oneScore],
+        [2, twoScore],
+        [3, threeScore],
     ]
-    
-    scoreArr.sort((a,b)=>{
-        if(a[0] > a[0]){
+
+    scoreArr.sort((a, b) => {
+        if (a[0] > a[0]) {
             return -1;
-        }else if( a[0] < b[0]){
+        } else if (a[0] < b[0]) {
             return 1;
-        }else if( a[1] > b[1]){
+        } else if (a[1] > b[1]) {
             return -1;
-        }else if( a[1] < b[1]){
+        } else if (a[1] < b[1]) {
             return 1;
         }
     })
-    
+
     // 동점자 구하기
     let cnt = 0;
-    for(let i =0; i<scoreArr.length; i++){
-        if(scoreArr[i+1] !== undefined){
-            if(scoreArr[0][1] === scoreArr[i+1][1]){
+    for (let i = 0; i < scoreArr.length; i++) {
+        if (scoreArr[i + 1] !== undefined) {
+            if (scoreArr[0][1] === scoreArr[i + 1][1]) {
                 cnt++;
             }
         }
     }
-    
-    for( let i =0; i<=cnt; i++){
+
+    for (let i = 0; i <= cnt; i++) {
         answer.push(scoreArr[i][0]);
     }
-    
+
     return answer;
 }
 
@@ -557,28 +557,28 @@ function solution(answers) {
     var answer = [];
     var a1 = [1, 2, 3, 4, 5];
     var a2 = [2, 1, 2, 3, 2, 4, 2, 5]
-    var a3 = [ 3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
+    var a3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
 
     // 모듈러 연산을 통해서 반복되는 인덱스를 구한다.
     // a1의 경우 0~4 % a1.length를 하게되면 모듈러 연산이라 a1.length 전 값까지는 기존 값이 들어오고
     // 그 이후 a1.length를 넘어가는 나머지가 return 되기때문에 반복적인 인덱스를 구할 수 있다.
     // 또한 filter의 length를 통해서 일치하는 항목들의 길이를 구해서 해당 길이를 통해 얼마나 일치하는지 판단한다.
-    var a1c = answers.filter((a,i)=> a === a1[i%a1.length]).length;
-    var a2c = answers.filter((a,i)=> a === a2[i%a2.length]).length;
-    var a3c = answers.filter((a,i)=> a === a3[i%a3.length]).length;
+    var a1c = answers.filter((a, i) => a === a1[i % a1.length]).length;
+    var a2c = answers.filter((a, i) => a === a2[i % a2.length]).length;
+    var a3c = answers.filter((a, i) => a === a3[i % a3.length]).length;
     // a1c , a2c , a3c 중 가장 큰 값을 구하고
-    var max = Math.max(a1c,a2c,a3c);
+    var max = Math.max(a1c, a2c, a3c);
 
     // 가장 큰 값을 answer에 push하도록 한다.
-    if (a1c === max) {answer.push(1)};
-    if (a2c === max) {answer.push(2)};
-    if (a3c === max) {answer.push(3)};
+    if (a1c === max) { answer.push(1) };
+    if (a2c === max) { answer.push(2) };
+    if (a3c === max) { answer.push(3) };
 
 
     return answer;
 }
 
-console.log(solution([1,3,2,4,2]));
+console.log(solution([1, 3, 2, 4, 2]));
 
 // 체육복
 // 해당 문제는 다시 풀어보기.. !
@@ -619,4 +619,25 @@ function solution(n, lost, reserve) {
     }
 
     return answer;
+}
+
+// 실패율
+function solution(N, stages) {
+    let answer = [];
+    //실패한 사람은 제외해야되기 떄문에 임시 변수 people생성
+    let people = stages.length
+    for (let i = 1; i <= N + 1; i++) {
+        //Array.filter() : 조건을 만족하는 원소만 추출
+        let tmp = stages.filter(n => n === i).length
+        //answer = [[스테이지, 실패율]]
+        answer.push([i, tmp / people])
+        //실패한 사람 제외
+        people -= tmp
+    }
+    //마지막은 모두 깬사람들이므로 실패율이 없어서 pop()
+    answer.pop()
+    //answer의 2번째 원소기준으로 내림차순으로 정렬
+    answer = answer.sort((a, b) => b[1] - a[1])
+    //Array.map() : 배열을 조건에 맞게 변환
+    return answer.map(a => a[0]);
 }
