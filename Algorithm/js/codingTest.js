@@ -642,3 +642,54 @@ function solution(N, stages) {
     return answer.map(a => a[0]);
 }
 
+// 약수의 개수와 덧셈
+// 나의 풀이
+function solution(left, right) {
+    // left ~ right
+    const numberArr = []; // left에서 right 사이의 숫자들이 담길 배열
+    let answer = 0; // 솔루션 리턴 값
+    
+    // 약수를 구하는 함수
+    // 이건 외워야할 것 같은데 .. ? 최소공배수 , 최대공약수 , 유클리드 호제법 , 소수구하기 , 순열과 조합 ,등 이런건 하루에 하나씩 손으로 쓰면서 외우도록 하자.
+    function findNum(value){
+        const target = Math.sqrt(value);
+        const returnArr = [];
+        for(let i =1; i<=target; i++){
+            // 작은 수 구하기
+            if(value%i === 0){
+                returnArr.push(i);
+                // 대칭되는 큰 수 구하기
+                if( value/i !== i){
+                    returnArr.push( value/i );
+                }
+            }
+        }
+        return returnArr;
+    }
+    
+    
+    for(let i = left ; i<=right; i++){
+        numberArr.push(i);
+    }
+    
+    const tempArr = []; // 약수들이 조건에 따라서 리턴된 값들을 담아두는 배열
+    
+    for(let x of numberArr){
+        let sum = 0;
+        let sumArr = findNum(x);
+
+        if(sumArr.length % 2 === 0){
+            tempArr.push(x);
+        }else{
+            tempArr.push(-x);
+        }
+    }
+    
+    answer = tempArr.reduce((a,b)=>a+b);
+    
+    return answer;
+    
+}
+
+
+
