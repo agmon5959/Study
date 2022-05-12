@@ -675,7 +675,6 @@ function solution(left, right) {
     const tempArr = []; // 약수들이 조건에 따라서 리턴된 값들을 담아두는 배열
     
     for(let x of numberArr){
-        let sum = 0;
         let sumArr = findNum(x);
 
         if(sumArr.length % 2 === 0){
@@ -686,10 +685,22 @@ function solution(left, right) {
     }
     
     answer = tempArr.reduce((a,b)=>a+b);
-    
-    return answer;
-    
+    return answer;   
 }
 
+// 약수의 개수와 덧셈 zi존 풀이
+function solution(left, right) {
+    var answer = 0;
+    for (let i = left; i <= right; i++) {
+        // 제곱근의 약수는 무조건 홀수이다..... 몰랐네 ... 
+        // Number.isInteger() -> 해당 값이 정수인지 판단
+        if (Number.isInteger(Math.sqrt(i))) {
+            answer -= i;
+        } else {
+            answer += i;
+        }
+    }
+    return answer;
+}
 
 
