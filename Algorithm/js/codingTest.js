@@ -704,3 +704,54 @@ function solution(left, right) {
 }
 
 
+// 3진법 뒤집기
+function solution(n) {
+    let answer = 0;
+    const numToThree = n.toString(3);
+    let str = "";
+    
+    for(let i = numToThree.length; i>0 ; i--){
+        str += numToThree[i-1];
+    }
+    
+    answer = parseInt(str,3);
+    
+    return answer;
+}
+
+// 두개뽑아서 더하기
+function solution(numbers) {
+    
+    let numArr = [];
+    
+    for(let i=0; i<numbers.length;i++){
+        for(let j=0; j<numbers.length;j++){
+            if(i === j) continue;
+            else{
+                numArr.push(numbers[i]+numbers[j]);
+            }
+        }
+    }
+    
+    return [...new Set(numArr)].sort((a,b)=>a-b);
+    
+}
+
+// 예산
+function solution(d, budget) {
+    
+    d.sort((a,b)=>a-b);
+    let cnt = 0;
+    
+    for(let x of d){
+        if(budget >= x){
+            budget -= x;
+            cnt ++;
+        }else{
+            break;
+        }
+    }
+    
+    return cnt;
+    
+}
