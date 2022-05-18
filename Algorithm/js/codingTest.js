@@ -648,44 +648,44 @@ function solution(left, right) {
     // left ~ right
     const numberArr = []; // left에서 right 사이의 숫자들이 담길 배열
     let answer = 0; // 솔루션 리턴 값
-    
+
     // 약수를 구하는 함수
     // 이건 외워야할 것 같은데 .. ? 최소공배수 , 최대공약수 , 유클리드 호제법 , 소수구하기 , 순열과 조합 ,등 이런건 하루에 하나씩 손으로 쓰면서 외우도록 하자.
-    function findNum(value){
+    function findNum(value) {
         const target = Math.sqrt(value);
         const returnArr = [];
-        for(let i =1; i<=target; i++){
+        for (let i = 1; i <= target; i++) {
             // 작은 수 구하기
-            if(value%i === 0){
+            if (value % i === 0) {
                 returnArr.push(i);
                 // 대칭되는 큰 수 구하기
-                if( value/i !== i){
-                    returnArr.push( value/i );
+                if (value / i !== i) {
+                    returnArr.push(value / i);
                 }
             }
         }
         return returnArr;
     }
-    
-    
-    for(let i = left ; i<=right; i++){
+
+
+    for (let i = left; i <= right; i++) {
         numberArr.push(i);
     }
-    
+
     const tempArr = []; // 약수들이 조건에 따라서 리턴된 값들을 담아두는 배열
-    
-    for(let x of numberArr){
+
+    for (let x of numberArr) {
         let sumArr = findNum(x);
 
-        if(sumArr.length % 2 === 0){
+        if (sumArr.length % 2 === 0) {
             tempArr.push(x);
-        }else{
+        } else {
             tempArr.push(-x);
         }
     }
-    
-    answer = tempArr.reduce((a,b)=>a+b);
-    return answer;   
+
+    answer = tempArr.reduce((a, b) => a + b);
+    return answer;
 }
 
 // 약수의 개수와 덧셈 zi존 풀이
@@ -709,49 +709,63 @@ function solution(n) {
     let answer = 0;
     const numToThree = n.toString(3);
     let str = "";
-    
-    for(let i = numToThree.length; i>0 ; i--){
-        str += numToThree[i-1];
+
+    for (let i = numToThree.length; i > 0; i--) {
+        str += numToThree[i - 1];
     }
-    
-    answer = parseInt(str,3);
-    
+
+    answer = parseInt(str, 3);
+
     return answer;
 }
 
 // 두개뽑아서 더하기
 function solution(numbers) {
-    
+
     let numArr = [];
-    
-    for(let i=0; i<numbers.length;i++){
-        for(let j=0; j<numbers.length;j++){
-            if(i === j) continue;
-            else{
-                numArr.push(numbers[i]+numbers[j]);
+
+    for (let i = 0; i < numbers.length; i++) {
+        for (let j = 0; j < numbers.length; j++) {
+            if (i === j) continue;
+            else {
+                numArr.push(numbers[i] + numbers[j]);
             }
         }
     }
-    
-    return [...new Set(numArr)].sort((a,b)=>a-b);
-    
+
+    return [...new Set(numArr)].sort((a, b) => a - b);
+
 }
 
 // 예산
 function solution(d, budget) {
-    
-    d.sort((a,b)=>a-b);
+
+    d.sort((a, b) => a - b);
     let cnt = 0;
-    
-    for(let x of d){
-        if(budget >= x){
+
+    for (let x of d) {
+        if (budget >= x) {
             budget -= x;
-            cnt ++;
-        }else{
+            cnt++;
+        } else {
             break;
         }
     }
-    
+
     return cnt;
-    
+
+}
+// 나머지가 1이 되는 수  찾기
+function solution(n) {
+
+    let answer = 0;
+    const x = parseInt(Math.sqrt(n))
+    for (let i = 1; i <= n; i++) {
+        if (n % i === 1) {
+            answer = i;
+            break;
+        }
+    }
+
+    return answer;
 }
