@@ -769,3 +769,47 @@ function solution(n) {
 
     return answer;
 }
+
+// 비밀지도
+function solution(n, arr1, arr2) {
+
+    function convertBinary(arr) {
+        const returnArr = [];
+        for (let i = 0; i < arr.length; i++) {
+            let pushedItem = arr[i].toString(2);
+            if (pushedItem.length !== n) {
+                while (true) {
+                    pushedItem = "0" + pushedItem;
+                    if (pushedItem.length === n) {
+                        break;
+                    }
+                }
+            }
+            returnArr.push(pushedItem);
+        }
+        return returnArr;
+    }
+
+    let newArr1 = convertBinary(arr1);
+    let newArr2 = convertBinary(arr2);
+
+    const answer = [];
+
+    for (let i = 0; i < n; i++) {
+        let str = "";
+        for (let j = 0; j < n; j++) {
+            if (newArr1[i][j] === '1' || newArr2[i][j] === '1') {
+                str += '#';
+            } else {
+                str += " ";
+            }
+
+        }
+        answer.push(str);
+
+    }
+
+
+    return answer;
+
+}
