@@ -813,3 +813,18 @@ function solution(n, arr1, arr2) {
     return answer;
 
 }
+
+// 가운데 글자 가져오기
+function solution(s) {
+    let a = parseInt(s.length / 2);
+    if (s.length % 2 === 0) {
+        return s.substr(a - 1, 2)
+    } else {
+        return s.substr(a, 1)
+    }
+}
+// 가운데 글자 가져오기 다른 사람의 풀이
+function solution(s) {
+    return s.substr(Math.ceil(s.length / 2) - 1, s.length % 2 === 0 ? 2 : 1);
+}
+
