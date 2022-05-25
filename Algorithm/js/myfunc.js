@@ -29,7 +29,19 @@ function myFunc() {
         'http://jira.duzon.com:8080/browse/HELP-168276',
         // 박도현
         'http://jira.duzon.com:8080/browse/HELP-168023',
+        'http://jira.duzon.com:8080/browse/HELP-168289',
+        // 박상훈
+        'http://jira.duzon.com:8080/browse/HELP-167729',
+        'http://jira.duzon.com:8080/browse/HELP-168177',
+        'http://jira.duzon.com:8080/browse/HELP-168024',
+        'http://jira.duzon.com:8080/browse/HELP-167635',
+        // 신종진
+        'http://jira.duzon.com:8080/browse/HELP-168269',
+        // 김민석
+        'http://jira.duzon.com:8080/browse/HELP-168310',
+        'http://jira.duzon.com:8080/browse/HELP-168308',
     ];
+
 
     let returnLIST = [];
 
