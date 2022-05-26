@@ -845,4 +845,69 @@ function solution(sizes) {
     return Math.max(...horizon) * Math.max(...vertical);
 }
 
+// 다트 게임
+function solution(data) {
+    // 각 회차별 점수
+    let chasu = -1;
+    const chasuArr = [0, 0, 0];
+    const optionArr = [0, 0, 0];
+    let score = 0;
+    let sum = 0;
+
+    for (let i = 0; i < data.length; i++) {
+        // 숫자가 아닌 경우
+        if (isNaN(data[i])) {
+            // * , #
+            if (["S", "D", "T"].indexOf(data[i]) === -1) {
+                if (data[i] === "*") {
+                    optionArr[chasu] = "*";
+                } else if (data[i] === "#") {
+                    optionArr[chasu] = "#";
+                }
+                // S D T
+            } else {
+                if (data[i] === "S") {
+                    chasuArr[chasu] = score;
+                } else if (data[i] === "D") {
+                    chasuArr[chasu] = Math.pow(score, 2);
+                } else if (data[i] === "T") {
+                    chasuArr[chasu] = Math.pow(score, 3);
+                }
+            }
+
+            // 숫자인 경우
+        } else {
+            // 1의 자리 점수 , 10이 들어오는 경우 score를 0으로 바꿔주지 않기 위해 조건처리
+            if (isNaN(data[i + 1]) && isNaN(data[i - 1])) {
+                score = Number(data[i]);
+                chasu++;
+            }
+            // 2의 자리 점수
+            else {
+                // score가 NaN으로 바뀌는 경우 조건처리
+                if (!isNaN(data[i + 1])) {
+                    score = Number(String(data[i]) + String(data[i + 1]));
+                    chasu++;
+                }
+            }
+        }
+    }
+
+
+    optionArr.forEach((iter, idx) => {
+
+        if (iter === '*') {
+            // 바로 이전것 까지 모두 돌아야함
+
+            chasuArr[idx] = chasuArr[idx] * 2;
+            chasuArr[idx - 1] = chasuArr[idx - 1] * 2;
+
+
+        } else if (iter === "#") {
+            chasuArr[idx] = chasuArr[idx] * -1
+        }
+    })
+
+    return chasuArr.reduce((a, b) => a += b, 0);
+}
 
