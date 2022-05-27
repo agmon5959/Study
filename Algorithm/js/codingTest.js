@@ -911,3 +911,29 @@ function solution(data) {
     return chasuArr.reduce((a, b) => a += b, 0);
 }
 
+// 같은 숫자는 싫어
+// 내 풀이
+function solution(arr) {
+    const returnArr = [arr[0]];
+    let tmp = arr[0];
+    arr.forEach((iter, idx) => {
+        if (tmp !== arr[idx]) {
+            returnArr.push(iter);
+            tmp = iter;
+        }
+
+    })
+    return returnArr;
+}
+// 남의 풀이
+function solution(arr) {
+    var answer = [arr[0]];
+
+    for (let i = 1; i < arr.length; i++) {
+        if (answer[answer.length - 1] !== arr[i]) {
+            answer.push(arr[i]);
+        }
+    }
+
+    return answer;
+}
