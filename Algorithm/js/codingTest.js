@@ -937,3 +937,42 @@ function solution(arr) {
 
     return answer;
 }
+// 나누어 떨어지는 숫자 배열
+function solution(arr, divisor) {
+    let returnArr = arr.filter(v => v % divisor === 0).sort((a, b) => a - b);
+    return returnArr.length === 0 ? [-1] : returnArr;
+}
+
+// 두 정수 사이의 합
+function solution(a, b) {
+    let ans = 0;
+    for (let i = Math.min(a, b); i <= Math.max(a, b); i++) {
+        ans += i;
+    }
+    return ans;
+}
+
+// 두 정수의 사이의 합 ( 가우스 덧셈 )
+// ((A+B) * ( B-A +1 )) /2
+function solution(a, b) {
+    return ((a + b) * (Math.abs(b - a) + 1)) / 2;
+}
+
+// 문자열 내 마음대로 정렬하기
+function solution(strings, n) {
+    strings.sort((a, b) => {
+        if (a[n] > b[n]) {
+            return 1;
+        } else if (a[n] < b[n]) {
+            return -1;
+        } else {
+            if (a > b) {
+                return 1;
+            } else if (b > a) {
+                return -1;
+            }
+        }
+    })
+
+    return strings;
+}
