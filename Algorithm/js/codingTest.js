@@ -976,3 +976,54 @@ function solution(strings, n) {
 
     return strings;
 }
+
+// 문자열 내 p와 y의 개수
+// 내 풀이
+function solution(s) {
+    let Pcnt = 0;
+    let Ycnt = 0;
+    for (let x of s) {
+        if (x.toUpperCase() === "P") {
+            Pcnt++;
+        } else if (x.toUpperCase() === "Y") {
+            Ycnt++;
+        }
+    }
+
+
+    return Pcnt === Ycnt ? true : false;
+}
+
+// 다른 사람의 풀이
+function numPY(s) {
+    //함수를 완성하세요
+    return s.toUpperCase().split("P").length === s.toUpperCase().split("Y").length;
+}
+
+
+// 문자열 내림차순으로 배치하기
+// 나의 풀이
+function solution(s) {
+    return [...s].sort().reverse().join('');
+}
+
+// 문자열 다루기 기본
+function solution(s) {
+    if (s.length === 4 || s.length === 6) {
+        let bool = true;
+        for (let x of s) {
+            if (isNaN(x)) {
+                bool = false;
+            }
+        }
+        return bool;
+    } else {
+        return false;
+    }
+}
+
+// 다른 사람의 풀이
+function alpha_string46(s) {
+    var regex = /^\d{6}$|^\d{4}$/;
+    return regex.test(s);
+}
