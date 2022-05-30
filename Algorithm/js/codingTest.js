@@ -1062,3 +1062,30 @@ function solution(phone_number) {
 function hide_numbers(s) {
     return s.replace(/\d(?=\d{4})/g, "*");
 }
+
+// 약수의 합
+// 나의 풀이
+function solution(n) {
+    let sqrt = Math.sqrt(n); // 100의 제곱근은 10
+    let arr = [];   // 배열 선언
+
+    for (let i = 1; i <= sqrt; i++) { // 1부터 제곱근까지 반복문
+        if (n % i === 0) { // 약수 중 작은 수 저장
+            arr.push(i);
+            if (n / i !== i) { // 약수 중 큰 수 저장
+                arr.push(n / i);
+            }
+        }
+    }
+    return arr.reduce((a, b) => a += b, 0);
+    // return arr.map((iter)=>console.log(iter));
+
+}
+// 남의 풀이
+function solution(num) {
+    let sum = 0;
+    for (let i = 1; i <= num; i++) {
+        if (num % i === 0) sum += i
+    }
+    return sum
+}
