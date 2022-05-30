@@ -1053,3 +1053,12 @@ function solution(s, n) {
             : String.fromCharCode(temp + n)
     }).join('')
 }
+
+// 핸드폰 번호 가리기
+function solution(phone_number) {
+    return ''.padStart(phone_number.length - 4, '*') + phone_number.substr(-4);
+}
+// 남의 풀이
+function hide_numbers(s) {
+    return s.replace(/\d(?=\d{4})/g, "*");
+}
