@@ -1039,3 +1039,17 @@ function alpha_string46(s) {
 
     return regex.test(s);
 }
+
+// 시저 암호
+// 아스키코드 변환 charCodeAt() <> String.fromCharCode()
+function solution(s, n) {
+    return [...s].map((iter) => {
+        if (iter == " ") {
+            return iter;
+        }
+        const temp = iter.charCodeAt()
+        return iter.toUpperCase().charCodeAt() + n > 90
+            ? String.fromCharCode(temp + n - 26)
+            : String.fromCharCode(temp + n)
+    }).join('')
+}
