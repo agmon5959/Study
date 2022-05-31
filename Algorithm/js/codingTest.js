@@ -1089,3 +1089,55 @@ function solution(num) {
     }
     return sum
 }
+
+// 이상한 문자 만들기
+// 나의 풀이
+function solution(s) {
+    function change(arr) {
+        let returnStr = '';
+        for (let i = 0; i < arr.length; i++) {
+            if (i % 2 === 0) {
+                returnStr += arr[i].toUpperCase();
+            } else {
+                returnStr += arr[i].toLowerCase();
+            }
+        }
+        return returnStr;
+    }
+
+    let flag = false;
+    let str = s.split(" ")
+    let returnValue = '';
+    for (let i = 0; i < str.length; i++) {
+        returnValue += change(str[i]);
+        if (i !== str.length - 1) {
+            returnValue += " ";
+        }
+    }
+
+    return returnValue
+}
+
+// 남의 풀이
+function toWeirdCase(s) {
+    var result = "";
+    var num = 0;
+
+    console.log(s.length);
+
+    for (var i = 0; i < s.length; i++) {
+        if (s.charAt(i) == " ") {
+            num = 0;
+            result += " ";
+            continue;
+        }
+        else if (num % 2 == 0) {
+            result += (s.charAt(i)).toUpperCase();
+            num++;
+        }
+        else {
+            result += (s.charAt(i)).toLowerCase();
+            num++;
+        }
+    }
+}
