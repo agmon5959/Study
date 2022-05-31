@@ -1141,3 +1141,84 @@ function toWeirdCase(s) {
         }
     }
 }
+// 자릿수 더하기
+// 나의 풀이
+function solution(num) {
+
+    let ans = 0;
+    for (let x of String(num)) {
+        ans += Number(x);
+    }
+    return ans;
+}
+
+// 자연수 뒤집어 배열로 만들기
+// 나의 풀이
+function solution(n) {
+    var answer = [];
+    for (let x of String(n)) {
+        answer.push(Number(x))
+    }
+    return answer.reverse();
+}
+
+// 남의 풀이
+// 쩐다
+function solution(n) {
+    // 문자풀이
+    // return (n+"").split("").reverse().map(v => parseInt(v));
+
+    // 숫자풀이
+    var arr = [];
+
+    do {
+        arr.push(n % 10);
+        n = Math.floor(n / 10);
+    } while (n > 0);
+
+    return arr;
+}
+
+// 정수 제곱근 판별
+// 나의 풀이
+function solution(n) {
+    if (String(Math.sqrt(n)).split('.').length === 1) {
+        return Math.pow(Math.sqrt(n) + 1, 2);
+    } else {
+        return -1;
+    }
+}
+
+// 남의 풀이
+function solution(n) {
+    // 내장함수
+    // let sqr = Math.sqrt(n);
+    // return sqr%1 ? -1 : (sqr+1)**2;
+
+    // 외장(?)함수 - 직접 sqrt 찾기
+    let upper = n;
+    let lower = 1;
+    let answer, x;
+    let tol = 0; //혹시라도 infinite loop안걸리게....
+    while (tol < 100000) {
+        x = (upper + lower) / 2;
+        x = x - (x % 1);
+        if (x ** 2 === n) {
+            answer = x;
+            break;
+        } else if (x ** 2 > n) {
+            upper = x;
+        } else if (x ** 2 < n) {
+            if (lower === x) {
+                answer = 0;
+                break;
+            }
+            lower = x;
+        }
+        tol++;
+    }
+    return answer ? (answer + 1) ** 2 : -1;
+}
+
+
+
