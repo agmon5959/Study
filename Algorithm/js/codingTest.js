@@ -1276,3 +1276,21 @@ function collatz(num) {
     return num == 1 ? answer : -1;
 }
 
+// 하샤드 수
+// 나의 풀이
+function solution(x) {
+    let num = 0;
+    [...String(x)].forEach((iter, idx) => {
+        num += Number(iter);
+    })
+
+
+    return x % num === 0 ? true : false;
+}
+
+// 남의 풀이
+function Harshad(n) {
+    return !(n % (n + "").split("").reduce((a, b) => +b + +a));
+}
+
+
