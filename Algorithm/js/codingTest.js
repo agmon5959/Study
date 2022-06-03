@@ -1243,7 +1243,9 @@ function solution(arr) {
     // 전개연산자와 indexOf 함수를 사용하여 제일 작은 수의 인덱스를 구한 뒤
     // splice함수를 통해서 해당 숫자만 잘라내서 값을 구했음.
     arr.splice(arr.indexOf(Math.min(...arr)), 1);
+
     if (arr.length < 1) return [-1];
+
     return arr;
 }
 // 콜라츠 추측
@@ -1292,5 +1294,6 @@ function solution(x) {
 function Harshad(n) {
     return !(n % (n + "").split("").reduce((a, b) => +b + +a));
 }
+
 
 
