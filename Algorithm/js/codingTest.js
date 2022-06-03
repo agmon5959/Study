@@ -1295,5 +1295,17 @@ function Harshad(n) {
     return !(n % (n + "").split("").reduce((a, b) => +b + +a));
 }
 
+// x만큼 간격이 있는 n개의 숫자
+// 나의 풀이
+function solution(x, n) {
+    let ans = [];
+    for (let i = 1; i <= n; i++) {
+        ans.push(x * i);
+    }
+    return ans;
+}
 
-
+// 남의 풀이
+function solution(x, n) {
+    return Array(n).fill(x).map((v, i) => (i + 1) * v)
+}
