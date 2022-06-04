@@ -1309,3 +1309,15 @@ function solution(x, n) {
 function solution(x, n) {
     return Array(n).fill(x).map((v, i) => (i + 1) * v)
 }
+
+// 행렬의 덧셈
+// 나의 풀이
+function solution(arr1, arr2) {
+    let ans = [];
+
+    for (let i = 0; i < arr1.length; i++) {
+        ans.push(arr1[i]);
+    }
+
+    return ans;
+}
