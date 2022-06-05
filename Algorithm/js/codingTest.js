@@ -1324,19 +1324,18 @@ function solution(arr1, arr2) {
 
 // 최소공배수와 최대공약수 ( 유클리드 호제법 풀이)
 // 나의 풀이
-function solution(a, b) {
-    // 유클리드 호제법 풀이
-
-    // num1에는 작은 수
-    // num2에는 큰 수
-    let num1 = Math.min(a, b)
-    let num2 = Math.max(a, b);
-
+function solution(num1, num2) {
     // 최대공약수(gcd)
     const gcd = (num1, num2) => num1 % num2 === 0 ? num2 : gcd(num2, num1 % num2);
-
+    // 작은수 
     // 최소공배수(lcm)
     const lcm = (num1, num2) => num1 * num2 / gcd(num1, num2);
 
     return [gcd(num1, num2), lcm(num1, num2)];
+}
+// 남의 풀이
+function gcdlcm(a, b) {
+    var r;
+    for (var ab = a * b; r = a % b; a = b, b = r) { }
+    return [b, ab / b];
 }
