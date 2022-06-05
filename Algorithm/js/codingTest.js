@@ -1321,3 +1321,12 @@ function solution(arr1, arr2) {
 
     return ans;
 }
+
+// 최소공배수와 최대공약수 ( 유클리드 호제법 풀이)
+// 나의 풀이
+function solution(num1, num2) {
+    // 유클리드 호제법 풀이
+    const gcd = (num1, num2) => num1 % num2 === 0 ? num2 : gcd(num2, num1 % num2);
+    const lcm = (num1, num2) => num1 * num2 / gcd(num1, num2);
+    return [gcd(num1, num2), lcm(num1, num2)];
+}
