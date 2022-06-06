@@ -1339,3 +1339,40 @@ function gcdlcm(a, b) {
     for (var ab = a * b; r = a % b; a = b, b = r) { }
     return [b, ab / b];
 }
+
+// 타겟 넘버
+// 나의 풀이
+function solution(numbers, target) {
+    let ans = 0;
+
+    function dfs(depth, sum) {
+        if (depth === numbers.length) {
+            if (sum === target) {
+                ans++;
+            }
+            return;
+        }
+        // index로 +1 , -1
+        dfs(depth + 1, sum + numbers[depth]);
+        dfs(depth + 1, sum - numbers[depth]);
+    }
+
+    dfs(0, 0);
+    return ans;
+}
+// 남의 풀이
+function solution(numbers, target) {
+    let answer = 0;
+    getAnswer(0, 0);
+    function getAnswer(x, value) {
+        if (x < numbers.length) {
+            getAnswer(x + 1, value + numbers[x]);
+            getAnswer(x + 1, value - numbers[x]);
+        } else {
+            if (value === target) {
+                answer++
+            }
+        }
+    }
+    return answer;
+}
