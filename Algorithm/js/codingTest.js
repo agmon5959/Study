@@ -1376,3 +1376,31 @@ function solution(numbers, target) {
     }
     return answer;
 }
+// 멀쩡한 사각형
+// 나의 풀이
+function solution(w, h) {
+    // 가로 + 세로 - 최대공약수
+    let getGCD = (a, b) => {
+        if (b === 0) {
+            return a;
+        } else {
+            return getGCD(b, (a % b));
+        }
+    }
+
+    let gcd = getGCD(w, h);
+    const ans = w + h - gcd;
+    return w * h - ans;
+}
+
+// 남의 풀이
+function solution(w, h) {
+    const slope = h / w;
+    let result = 0;
+
+    for (let i = 1; i <= w; i++) {
+        result += Math.ceil(slope * i);
+    }
+
+    return ((h * w) - result) * 2;
+}
