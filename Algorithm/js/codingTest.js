@@ -1404,3 +1404,54 @@ function solution(w, h) {
 
     return ((h * w) - result) * 2;
 }
+
+// 기능개발
+// 나의 풀이
+function solution(progresses, speeds) {
+    var answer = [];
+    let cnt = 0;
+    let len = speeds.length;
+
+    while (progresses[0]) {
+        for (let i = 0; i < progresses.length; i++) {
+            progresses[i] += speeds[i];
+        }
+
+        if (progresses[0] >= 100) {
+            for (let j = 0; j < len; j++) {
+                if (progresses[0] >= 100) {
+                    cnt++;
+                    progresses.shift();
+                    speeds.shift();
+                } else {
+                    break;
+                }
+            }
+        }
+        if (cnt > 0) {
+            answer.push(cnt);
+            cnt = 0;
+            len = progresses.length;
+        }
+    }
+
+    return answer;
+}
+
+// 남의 풀이
+function solution(progresses, speeds) {
+    let answer = [0];
+    let days = progresses.map((progress, index) => Math.ceil((100 - progress) / speeds[index]));
+    let maxDay = days[0];
+
+    for (let i = 0, j = 0; i < days.length; i++) {
+        if (days[i] <= maxDay) {
+            answer[j] += 1;
+        } else {
+            maxDay = days[i];
+            answer[++j] = 1;
+        }
+    }
+
+    return answer;
+}
