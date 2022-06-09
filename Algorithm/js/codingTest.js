@@ -1455,3 +1455,14 @@ function solution(progresses, speeds) {
 
     return answer;
 }
+
+
+// 짝지어 제거하기
+// 나의 풀이
+function solution(s) {
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === s[i + 1]) {
+
+        }
+    }
+}
