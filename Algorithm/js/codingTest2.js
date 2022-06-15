@@ -186,6 +186,7 @@ function solution(s) {
 }
 
 // 프린터
+// 나의풀이
 function solution(priorities, location) {
     // 배열 길이가 줄어들 때 ( 앞에꺼로 뭔가 작업한 이후 ) > -- 
     // 가장 뒤로 넘어갈 때  > priorities.length
