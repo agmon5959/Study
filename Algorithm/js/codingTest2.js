@@ -188,47 +188,44 @@ function solution(s) {
 // 프린터
 // 나의풀이
 function solution(priorities, location) {
-    // 배열 길이가 줄어들 때 ( 앞에꺼로 뭔가 작업한 이후 ) > -- 
-    // 가장 뒤로 넘어갈 때  > priorities.length
-    let p = location;
-    let temp = 0;
-    let cnt = 0;
-    let targetArr = [];
 
-    // @value : 배열의 0번째 아이템
-    // @arr : 남아있는 배열
-    function getPicker(value, arr) {
-        let bool = false;
-        let maxNum = Math.max(...arr);
-        if (value === maxNum) {
-            bool = true;
-        }
-        return bool;
-    }
-
-    for (let i = 0; i < priorities.length; i++) {
-
-        let item = priorities.shift();
-        let pickFlag = getPicker(item, priorities);
-
-        // 배열 내 요소가 탈출
-        if (pickFlag) {
-            // pointer가 0이라면 내 인쇄물
-            if (p === 1) {
-                return cnt
+    let cnt = 1;
+    while (priorities.length) {
+        if (priorities[0] === Math.max(...priorities)) {
+            if (location == 0) {
+                return cnt;
+            } else {
+                cnt++;
+                priorities.shift();
+                location--;
             }
-            // 남의 인쇄물
-            else {
-                p--; // 포인터 옮기기
-                i--; // length 맞춰주기
-                cnt++; // 횟수 늘려주기
-            }
-
-            // 제일 뒤로 넘겨주기
         } else {
-            p--; // 포인터 옮겨주기
-            priorities.push(item);
+            if (location == 0) {
+                location = priorities.length - 1
+            } else {
+                location--;
+            }
+            priorities.push(priorities.shift());
         }
     }
     return cnt;
+}
+
+// 남의 풀이
+function solution(priorities, location) {
+    var list = priorities.map((t, i) => ({
+        my: i === location,
+        val: t
+    }));
+    var count = 0;
+    while (true) {
+        var cur = list.splice(0, 1)[0];
+        if (list.some(t => t.val > cur.val)) {
+            list.push(cur);
+        }
+        else {
+            count++;
+            if (cur.my) return count;
+        }
+    }
 }
