@@ -179,16 +179,55 @@ function solution(s) {
                     if (j + i === s.length) ans += str2;
                 }
             }
-
-
-
-
         }
         min = Math.min(ans.length, min);
     }
-
-
-
-
     return min;
+}
+
+// 프린터
+function solution(priorities, location) {
+    // 배열 길이가 줄어들 때 ( 앞에꺼로 뭔가 작업한 이후 ) > -- 
+    // 가장 뒤로 넘어갈 때  > priorities.length
+    let p = location;
+    let temp = 0;
+    let cnt = 0;
+    let targetArr = [];
+
+    // @value : 배열의 0번째 아이템
+    // @arr : 남아있는 배열
+    function getPicker(value, arr) {
+        let bool = false;
+        let maxNum = Math.max(...arr);
+        if (value === maxNum) {
+            bool = true;
+        }
+        return bool;
+    }
+
+    for (let i = 0; i < priorities.length; i++) {
+
+        let item = priorities.shift();
+        let pickFlag = getPicker(item, priorities);
+
+        // 배열 내 요소가 탈출
+        if (pickFlag) {
+            // pointer가 0이라면 내 인쇄물
+            if (p === 1) {
+                return cnt
+            }
+            // 남의 인쇄물
+            else {
+                p--; // 포인터 옮기기
+                i--; // length 맞춰주기
+                cnt++; // 횟수 늘려주기
+            }
+
+            // 제일 뒤로 넘겨주기
+        } else {
+            p--; // 포인터 옮겨주기
+            priorities.push(item);
+        }
+    }
+    return cnt;
 }
