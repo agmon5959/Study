@@ -229,3 +229,36 @@ function solution(priorities, location) {
         }
     }
 }
+
+// 가장 큰 수 
+// 나의 풀이
+function solution(numbers) {
+    let maxNum = Number.MIN_SAFE_INTEGER;
+    let returnArr = [];
+    let modular = 1;
+    // 탈출 조건 필요
+    while (numbers.length) {
+        // 1의 자리 / 10의자리 / 100의 자리 ... 
+        modular *= 10;
+        let tempArr = [];
+        for (let i = 0; i < numbers.length; i++) {
+            // 해당 반복문에서 제일 작은 자릿수
+            if (numbers[i] % modular !== 0) {
+                if (numbers[i] <= modular) {
+                    tempArr.push(numbers[i]);
+                    numbers[i] = 0;
+                }
+            }
+        }
+
+        if (tempArr.length !== 0) {
+            debugger
+            tempArr.sort((a, b) => b - a);
+            debugger
+        }
+
+
+    }
+}
+
+console.log(solution([3, 30, 34, 5, 9]));
