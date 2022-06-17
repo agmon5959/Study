@@ -262,3 +262,13 @@ function solution(numbers) {
 }
 
 console.log(solution([3, 30, 34, 5, 9]));
+
+
+// 위장
+function solution(clothes) {
+    let obj = {};
+    for (let i = 0; i < clothes.length; i++) {
+        obj[clothes[i][1]] = clothes[i][0];
+    }
+    console.log(obj);
+}
