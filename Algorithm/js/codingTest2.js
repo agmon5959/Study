@@ -283,52 +283,15 @@ function solution(clothes) {
 // ㅠㅠ 아 어려워
 
 function solutionT1(numbers) {
-    let ans = [];
 
-    // 문자열 비교를 위해서 number 배열을 string 배열로 바꿔주기
-    let arr = numbers.map((iter, idx) => {
-        return String(iter);
-    })
-
+    // var answer = numbers.map(c => c + '').
+    //     sort((a, b) => (b + a) - (a + b)).join('');
+    let ans = numbers.map(iter => iter + '');
     debugger
-    let cnt = 0;
-    let bool = true;
-    while (bool) {
-        debugger
-        // n의 자리의 숫자가 큰 순서대로 정렬
-        arr.sort((a, b) => {
-            if (a[cnt] > b[cnt]) { return -1 }
-            else { return 0 }
-        })
+    ans.sort((a, b) => (b + a) - (a + b));
+    debugger
 
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i + 1] === undefined) break;
-            // 숫자의 자릿수가 변경되는 경우
-            if (arr[i][cnt] === undefined) {
-                // 반대로 정렬
-                arr.sort((a, b) => {
-                    if (a[cnt] > b[cnt]) { return 0 }
-                    else { return -1 }
-                })
-                arr.unshift(arr.pop());
-                arr[0] = arr[0] + arr[1];
-            }
-
-            // n의 자리의 숫자가 같으면 break;
-            if (arr[i][cnt] === arr[i + 1][cnt]) {
-                break;
-                // 다를 때 arr의 첫번째 인덱스의 숫자를 ans에 push
-            } else {
-                ans.push(arr.shift());
-                i--;
-            }
-        }
-        cnt++;
-
-        // 
-        if (cnt == 5) { bool = false }
-
-    }
+    return answer[0] === '0' ? '0' : answer;
 }
 
 console.log(solutionT1([3, 30, 34, 5, 9]));
