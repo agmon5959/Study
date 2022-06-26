@@ -287,10 +287,10 @@ function solutionT1(numbers) {
     // var answer = numbers.map(c => c + '').
     //     sort((a, b) => (b + a) - (a + b)).join('');
     let ans = numbers.map(iter => iter + '');
-    debugger
+    // A항이 B항보다 작다면 return이 음수로 됨.
+    // -> 정렬 함수에서 음수일때 / 0 일때 / 양수일 때의 경우를 정확히 파악해서 사용해야할 것 같다.
+    // 해당 부분 다시 한번 점검이 필요하다.
     ans.sort((a, b) => (b + a) - (a + b));
-    debugger
-
     return answer[0] === '0' ? '0' : answer;
 }
 
