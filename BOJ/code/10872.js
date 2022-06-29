@@ -1,4 +1,4 @@
-// 사파리월드
+// 팩토리얼
 let input = require('fs').readFileSync('input.txt').toString().split(' ');
 let a = parseInt(input[0]);
 let ans = 1;
