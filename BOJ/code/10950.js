@@ -1,3 +1,4 @@
+// A+B
 
 let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
 let ansArr = input.map(iter => iter.split(' '));
