@@ -178,7 +178,8 @@ function _10807() {
 
 function _5597() {
     // 과제 안 내신 분
-    // 출력은 2줄이다. 1번째 줄엔 제출하지 않은 학생의 출석번호 중 가장 작은 것을 출력하고, 2번째 줄에선 그 다음 출석번호를 출력한다.
+    // 출력은 2줄이다. 1번째 줄엔 제출하지 않은 학생의 출석번호 중 가장 작은 것을 출력하고, 2번째 줄에선 그 다음 출석번호를 출력한다
+    // 이게 왜 안되는지 .. ;; ^-^ ;;; 
     const fs = require('fs');
     const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
     const input = fs.readFileSync(filePath).toString().split('\n');
