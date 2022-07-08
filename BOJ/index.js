@@ -1,22 +1,45 @@
 let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
-let num = input.pop();
+const len = (input.shift());
+const value = (input);
 
-function fibonacci(n) {
-    // TODO: 여기에 코드를 작성합니다.
-    //일단 초기 배열이 [0, 1]에서 시작하여 배열의 요소를 누적해 나가는 방법
-    //그리고 이미 구해놓은 것은 배열의 요소로 저장해놓기..!!! 그래야 런타임이 초과되지 않는다
+// push X: 정수 X를 스택에 넣는 연산이다.
+// pop: 스택에서 가장 위에 있는 정수를 빼고, 그 수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다.
+// size: 스택에 들어있는 정수의 개수를 출력한다.
+// empty: 스택이 비어있으면 1, 아니면 0을 출력한다.
+// top: 스택의 가장 위에 있는 정수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다.
+const arr = [];
+const ans = [];
+value.forEach((iter) => {
+    switch (iter.split(' ')[0]) {
+        case "push":
+            arr.push(Number(iter.split(' ')[1]));
+            break;
+        case "top":
+            if (arr.length === 0) {
+                ans.push(-1)
+                // console.log(-1);
+            } else {
+                ans.push(arr[arr.length - 1]);
+            }
+            break;
+        case "size":
+            ans.push(arr.length);
+            break;
+        case "empty":
+            if (arr.length === 0) {
+                ans.push(1);
+            } else {
+                ans.push(0);
+            }
+            break;
+        case "pop":
+            if (arr.length === 0) {
+                ans.push(-1)
+            } else {
+                ans.push(arr.pop());                
+            }
+            break;
+    }
+})
 
-    let newArr = [0, 1]; //0번째 1번째 요소는 고정시켜두고 
-
-    let fib = (n) => { //함수 한개를 선언해주고
-        if (newArr[n] !== undefined) {
-            return newArr[n]; //이미 있는 건 그대로 리턴
-        }
-        newArr[n] = fib(n - 1) + fib(n - 2); //없는 건 새로 만들어서 저장!!!*****
-        return newArr[n];
-    };
-
-    return fib(n);
-}
-
-console.log(fibonacci(Number(num)));
+console.log(ans.join('\n'));

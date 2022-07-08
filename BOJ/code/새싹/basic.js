@@ -292,3 +292,7 @@ function _10870() {
 
     console.log(fibonacci(Number(num)));
 }
+
+function _10826() {
+    
+}
