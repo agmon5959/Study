@@ -1,17 +1,30 @@
 let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
 const len = (input.shift());
 const value = (input);
-const answer = '';
-for (let i = 0; i < len; i++) {
-    let word = value[i].split(' ')
-    단어뒤집기(word);
+
+for (let i = 0; i < value.length; i++) {
+    console.log(괄호(value[i]));
 }
 
-function 단어뒤집기(pWord) {
-    console.log(pWord);
-    let ans = [];
-    for (let i = 0; i < pWord.length; i++) {
-        ans.push(pWord.pop());
+function 괄호(param) {
+    let arr = [];
+    for (let i = 0; i < param.length; i++) {
+        if (param[0] === ")") return "NO";
+
+        if (param[i] === "(") {
+            arr.push(param[i]);
+        } else {
+            if (arr.length === 0) {
+                return "NO";
+            }
+            else if (arr[arr.length - 1] === ")") {
+                return "NO";
+            }
+            else {
+                arr.pop();
+            }
+        }
     }
-    console.log(ans);
+    if (arr.length === 0) return "YES";
+    else return "NO";
 }
