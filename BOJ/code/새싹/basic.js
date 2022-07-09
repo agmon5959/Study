@@ -294,5 +294,48 @@ function _10870() {
 }
 
 function _10826() {
+    let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
+    const len = (input.shift());
+    const value = (input);
+
+    const arr = [];
+    const ans = [];
+    value.forEach((iter) => {
+        switch (iter.split(' ')[0]) {
+            case "push":
+                arr.push(Number(iter.split(' ')[1]));
+                break;
+            case "top":
+                if (arr.length === 0) {
+                    ans.push(-1)
+                    // console.log(-1);
+                } else {
+                    ans.push(arr[arr.length - 1]);
+                }
+                break;
+            case "size":
+                ans.push(arr.length);
+                break;
+            case "empty":
+                if (arr.length === 0) {
+                    ans.push(1);
+                } else {
+                    ans.push(0);
+                }
+                break;
+            case "pop":
+                if (arr.length === 0) {
+                    ans.push(-1)
+                } else {
+                    ans.push(arr.pop());
+                }
+                break;
+        }
+    })
+
+    console.log(ans.join('\n'));
+}
+
+function _9093() {
     
 }
