@@ -1,5 +1,1 @@
-abcd
-3
-P x
-L
-P y
+<ab cd>ef gh<ij kl>
