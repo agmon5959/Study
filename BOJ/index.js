@@ -1,25 +1,36 @@
 let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
-const len = (input.shift());
-const value = (input);
 
-let arr = [1];
-let ans = ['+'];
-let cnt = 1;
+const targetArr = [...input.shift()];
+const len = Number(input.shift());
+const param = input;
+let tempArr = [];
 
+for (let i = 0; i < len; i++) {
+    const command = param[i].split(' ')[0];
 
-while (value.length !== 0) {
-
-    if (value[0] == arr[arr.length - 1]) {
-        value.splice(0, 1);
-        arr.pop();
-        ans.push('-');
-    } else {
-        arr.push(++cnt);
-        ans.push('+');
+    switch (command) {
+        case "L":   // target -> temp
+            if (targetArr.length !== 0) {
+                tempArr.push(targetArr.pop());
+            }
+            
+            break;
+        case "D": // temp -> target
+            if (tempArr.length !== 0) {
+                targetArr.push(tempArr.pop())
+            }
+            break;
+        case "B":
+            targetArr.pop()
+            break;
+        case "P":
+            let value = param[i].split(' ')[1];
+            targetArr.push(value);
+            break;
     }
-    if (cnt > len) { 
-        ans = ['NO'];
-        break;
-     }
 }
-console.log(ans.join('\n'));
+
+
+console.log(
+    targetArr.concat(tempArr.reverse()).join('')
+);
