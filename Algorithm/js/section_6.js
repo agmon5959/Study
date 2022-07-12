@@ -153,6 +153,7 @@ function solution(s) {
     // 입력값으로  () / {} / [] 이런 애들이 들어오는 경우엔 80%는 스택을 사용하여 풀면 편리하다.
 
     let answer = 0;
+    
     let stack = [];
     for (let i = 0; i < s.length; i++) {
         // 여는 괄호

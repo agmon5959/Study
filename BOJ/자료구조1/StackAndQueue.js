@@ -3,7 +3,7 @@
 // todo && TODO
 // ?
 function _1406() {
-    
+
     let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
 
     const targetArr = [...input.shift()];
@@ -180,5 +180,67 @@ function _10866() {
 }
 
 function _17413() {
-    
+    let input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
+    const param = input;
+    const arr = [...param.pop()];
+
+    let comArr = [];
+    let reverseArr = [];
+    let bool = false;
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === "<") {
+            bool = true;
+        } else if (arr[i] === ">") {
+            bool = false;
+        }
+
+        if (bool) { // <
+            if (
+                (arr[i] === "<" || arr[i] === '')
+                && i !== 0) {
+                comArr.push(reverseArr.reverse());
+                reverseArr = [];
+            }
+            comArr.push(arr[i]);
+        } else { // >
+            if (arr[i] === ">") {
+                comArr.push(arr[i]);
+            } else {
+                if (arr[i] === ' ') {
+                    comArr.push(reverseArr.reverse());
+                    reverseArr.push(arr[i]);
+                    reverseArr = [];
+                } else {
+                    reverseArr.push(arr[i]);
+                }
+            }
+        }
+    }
+    if (reverseArr.length !== 0) {
+        comArr.push(reverseArr.reverse());
+    }
+    console.log(String(comArr.join()).replace(/,/gi, ""));
+
+}
+
+function _10799() {
+    let input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
+    const value = input.pop();
+    const arr = [];
+    let ans = 0;
+    for (let i = 0; i < value.length; i++) {
+        if (value[i] === "(") {
+            arr.push(value[i]);
+        } else {
+            if (value[i - 1] !== undefined && value[i - 1] === "(") { // 레이저인 경우
+                arr.pop();
+                ans += arr.length;
+            } else {
+                arr.pop();
+                ans += 1;
+            }
+        }
+    }
+    console.log(ans);
 }
