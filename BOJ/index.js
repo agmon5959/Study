@@ -1,13 +1,15 @@
 let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
 let arr = input[1].split(' ').map(e => Number(e));
 let returnArr = [];
+console.log(arr);
 
 while (arr.length) {
     
     if (arr.length === 1) {
         returnArr.push(-1);
         break;
-    }
+    } 
+    
     let target = arr.shift();
     let value = findBiggerFiveNum(target, arr);
     returnArr.push(value);
