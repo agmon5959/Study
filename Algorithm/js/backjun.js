@@ -1,9 +1,6 @@
 function com(parameter) {
     const fs = require('fs');
 }
-// 2557 Hello World
-console.log("Hello World!");
-// 
 
 function t1() {
 
@@ -25,4 +22,22 @@ function t1() {
 
     console.log(arr);
 }
-console.log(t1());
+
+
+function 오큰수() {
+    let input = [3, 5, 2, 7];
+    let temp = [];
+    let result = Array.from({ length: input.length }).fill(-1);
+    debugger
+    for (let i = 0; i < input.length; i++) {
+        while (temp.length && input[temp[temp.length - 1]] < input[i]) {
+            debugger
+            result[temp.pop()] = input[i];
+        }
+        debugger
+        temp.push(i);
+    }
+    debugger
+    console.log(result.join(" "))
+}
+console.log(오큰수());
