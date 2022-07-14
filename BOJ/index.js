@@ -1,33 +1,23 @@
 let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
-let arr = input[1].split(' ').map(e => Number(e));
-let returnArr = [];
-console.log(arr);
+let seg = input[1].split(' ').map(e => Number(e));
+let stack = [];
+let ansArr = Array.from({ length: seg.length }).fill(-1);
+let obj = {}
 
-while (arr.length) {
-    
-    if (arr.length === 1) {
-        returnArr.push(-1);
-        break;
-    } 
-    
-    let target = arr.shift();
-    let value = findBiggerFiveNum(target, arr);
-    returnArr.push(value);
+seg.forEach((iter) => {
+    if (obj[iter] !== undefined) {
+        obj[iter] += 1;
+    } else {
+        obj[iter] = 1;
+    }
+})
+
+for (let i = 0; i < Number(input[0]); i++) {
+    while (stack.length && obj[seg[i]] > obj[seg[stack[stack.length - 1]]]) {
+        ansArr[stack.pop()] = seg[i];
+    }
+    stack.push(i)
 }
 
-function findBiggerFiveNum(targetNum, originArr) {
-    let ans = undefined;
-    for (let i = 0; i < originArr.length; i++){
-        if (targetNum < originArr[i]) {
-            ans = originArr[i];
-            break;
-        }
-    }
-    // 다 돌았는데 없는 경우
-    if (ans === undefined) {
-        return -1;
-    }
-    return ans;
-}
+console.log(ansArr.join(' '));
 
-console.log(returnArr.join(' '));

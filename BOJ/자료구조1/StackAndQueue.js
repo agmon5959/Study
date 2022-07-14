@@ -244,3 +244,82 @@ function _10799() {
     }
     console.log(ans);
 }
+
+// 오큰수 시간초과 풀이
+function _17298() {
+    let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
+    let arr = input[1].split(' ').map(e => Number(e));
+    let returnArr = [];
+    console.log(arr);
+
+    while (arr.length) {
+
+        if (arr.length === 1) {
+            returnArr.push(-1);
+            break;
+        }
+
+        let target = arr.shift();
+        let value = findBiggerFiveNum(target, arr);
+        returnArr.push(value);
+    }
+
+    function findBiggerFiveNum(targetNum, originArr) {
+        let ans = undefined;
+        for (let i = 0; i < originArr.length; i++) {
+            if (targetNum < originArr[i]) {
+                ans = originArr[i];
+                break;
+            }
+        }
+        // 다 돌았는데 없는 경우
+        if (ans === undefined) {
+            return -1;
+        }
+        return ans;
+    }
+
+    console.log(returnArr.join(' '));
+}
+
+// 오큰수 통과 풀이
+// 이해하는데 시간 오래걸렸음,.
+function _17298_2() {
+    let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
+    let seg = input[1].split(' ').map(e => Number(e));
+    let stack = [];
+    let ansArr = Array.from({ length: seg.length }).fill(-1);
+
+    for (let i = 0; i < Number(input[0]); i++) {
+        while (stack.length && seg[i] > seg[stack[stack.length - 1]]) {
+            ansArr[stack.pop()] = seg[i];
+        }
+        stack.push(i)
+    }
+    console.log(ansArr.join(' '));
+}
+
+function _17299() {
+    let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
+    let seg = input[1].split(' ').map(e => Number(e));
+    let stack = [];
+    let ansArr = Array.from({ length: seg.length }).fill(-1);
+    let obj = {}
+
+    seg.forEach((iter) => {
+        if (obj[iter] !== undefined) {
+            obj[iter] += 1;
+        } else {
+            obj[iter] = 1;
+        }
+    })
+
+    for (let i = 0; i < Number(input[0]); i++) {
+        while (stack.length && obj[seg[i]] > obj[seg[stack[stack.length - 1]]]) {
+            ansArr[stack.pop()] = seg[i];
+        }
+        stack.push(i)
+    }
+
+    console.log(ansArr.join(' '));
+}
