@@ -40,4 +40,31 @@ function 오큰수() {
     debugger
     console.log(result.join(" "))
 }
-console.log(오큰수());
+
+
+function 오등큰수() {
+    let input = [7, '1 1 2 3 4 2 1'];
+    let seg = input[1].split(' ').map(e => Number(e));
+    let stack = [];
+    let ansArr = Array.from({ length: seg.length }).fill(-1);
+    let obj = {}
+
+
+    seg.forEach((iter) => {
+        if (obj[iter] !== undefined) {
+            obj[iter] += 1;
+        } else {
+            obj[iter] = 1;
+        }
+    })
+
+    for (let i = 0; i < Number(input[0]); i++) {
+        while (stack.length && obj[seg[i]] > obj[seg[stack[stack.length - 1]]]) {
+            ansArr[stack.pop()] = seg[i];
+        }
+        stack.push(i)
+    }
+
+    console.log(ansArr);
+}
+console.log(오등큰수());
