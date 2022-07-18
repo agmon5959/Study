@@ -1,27 +1,14 @@
-const input = require('fs').readFileSync('input.txt').toString().split('\n')
-let returnArr = [];
-let param = [...input.pop()];
-for (let x of param) {
-    let value = x.charCodeAt();
-    if (value >= 97 && value <= 122) {
-        value += 13;
-        if (value > 122) {
-            value = value - 26;
-        }
+const input = require('fs').readFileSync('input.txt').toString().trim().split('\n')
+let param = input.pop();
+let pNum1 = param.split(" ")[0];
+let pNum2 = param.split(" ")[1];
 
-        returnArr.push(String.fromCharCode(value));
-    } else if (value >= 65 && value <= 90) {
-        value += 13;
-        if (value > 90) {
-            value = value - 26;
-        }
 
-        returnArr.push(String.fromCharCode(value));
-    } else if (value === 32) {
-        returnArr.push(' ');
-    } else {
-        returnArr.push(x);
-    }
-
+function 유클리드호제법(num1, num2) {
+    
+    const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
+    const lcm = (a, b) => a * b / gcd(a, b);
+    return [gcd(num1, num2), lcm(num1, num2)];
 }
-console.log(returnArr.join(''));
+
+console.log(유클리드호제법(Number(pNum1), Number(pNum2)).join('\n') );
