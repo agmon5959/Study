@@ -128,6 +128,64 @@ function _11655() {
     console.log(returnArr.join(''));
 }
 
-function _1918() {
+function _1943() {
+    const input = require('fs').readFileSync('input.txt').toString().trim().split('\n')
+    let param = input.pop();
+    let pNum1 = param.split(" ")[0];
+    let pNum2 = param.split(" ")[1];
 
+
+    function 유클리드호제법(num1, num2) {
+
+        const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
+        const lcm = (a, b) => a * b / gcd(a, b);
+        return [gcd(num1, num2), lcm(num1, num2)];
+    }
+
+    console.log(유클리드호제법(Number(pNum1), Number(pNum2)).join('\n'));
+}
+
+function _1943() {
+    // 두 자연수 A와 B에 대해서, A의 배수이면서 B의 배수인 자연수를 A와 B의 공배수라고 한다.이런 공배수 중에서 가장 작은 수를 최소공배수라고 한다.예를 들어, 6과 15의 공배수는 30, 60, 90등이 있으며, 최소 공배수는 30이다.
+    // 두 자연수 A와 B가 주어졌을 때, A와 B의 최소공배수를 구하는 프로그램을 작성하시오.
+    const input = require('fs').readFileSync('input.txt').toString().trim().split('\n')
+    const len = input.shift();
+
+    for (let i = 0; i < len; i++) {
+        console.log(유클리드호제법(Number(input[i].split(' ')[0]), Number(input[i].split(' ')[1])));
+    }
+
+    function 유클리드호제법(num1, num2) {
+        const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
+        const lcm = (a, b) => a * b / gcd(a, b);
+        return lcm(num1, num2);
+    }
+
+}
+
+function _1978() {
+    const input = require('fs').readFileSync('input.txt').toString().trim().split('\n')
+    const len = input.shift();
+    let param = input[0].split(' ');
+
+    const isPrime = (n) => {
+        if (n == 1) {
+            return false;
+        }
+
+        for (let i = 2; i <= (Math.sqrt(n)); i++) {
+            if (n % i === 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    console.log(param.filter(v => isPrime(v)).length);
+}
+
+function _6588() {
+    
 }
