@@ -186,6 +186,39 @@ function _1978() {
     console.log(param.filter(v => isPrime(v)).length);
 }
 
+// 꽤나 어려웠다 .. 수학적인 부분이 굉장히 까다로웁다 ,, 
+
 function _6588() {
+    const input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
+
+    input.pop();
+    //? 소수는 변하지않기 때문에 파라미터로 들어온 숫자 중 가장 큰 숫자를 기준으로 소수 배열을 만들어주기 위해서 최대 값을 구한다.
+    //? 반복문을 돌 때 마다 소수를 구해주면 효율성이 떨어지기 때문.
+    const maxNum = Math.max(...input);
+
+    //? 위에서 구한 최대값보다 1만큼 크게 배열을 만든 뒤 false로 기본값 초기화를 해준다.
+    //? 0번 인덱스는 사용하지 않는다. ( 인덱스가 곧 숫자로 인지하기 편하도록 )
+    const check = Array(maxNum + 1).fill(false);
+
+    for (let i = 2; i <= maxNum; i++) {
+        if (!check[i]) {
+            for (let j = i * i; j <= maxNum; j += i) {
+                check[j] = true;
+            }
+        }
+    }
+
+    //! 만들어진 소수 배열을 통해 골드바흐의 추측을 풀어내는 부분
+    input.forEach((iter) => {
+        for (let i = 3; i < iter; i += 2) {
+            if (!check[i] && !check[iter - i]) {
+                console.log(`${iter} = ${i} + ${iter - i}`);
+                break;
+            }
+        }
+    })
+}
+
+function _1676() {
     
 }
